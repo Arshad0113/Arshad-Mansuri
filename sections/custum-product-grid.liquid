@@ -1,32 +1,28 @@
 {% style %}
-  /* Global section layout */
+  /* Section layout and background */
   .tisso-wild-section {
     padding: 60px 8%;
     background-color: #f4f4f4;
     font-family: 'Instrument Sans', sans-serif;
   }
 
-  .wild-header {
-    text-align: left;
-    margin-bottom: 30px;
-  }
-
+  /* Section heading style */
   .wild-header h2 {
     font-size: 32px;
     font-weight: 400;
     color: #121212;
-    margin: 0;
+    margin: 0 0 30px 0;
     font-family: serif;
   }
 
-  /* Desktop Grid - 3 Columns */
+  /* Desktop 3-column grid */
   .wild-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
   }
 
-  /* Product Card */
+  /* Product card aspect ratio */
   .wild-grid-item {
     position: relative;
     background-color: #fff;
@@ -41,17 +37,17 @@
     object-fit: cover; z-index: 1;
   }
 
-  /* Hover Plus Button */
+  /* Plus button styling */
   .btn-open-modal {
     position: absolute; bottom: 15px; right: 15px;
     width: 35px; height: 35px; background-color: #fff; color: #000;
-    border: none; border-radius: 50%; font-size: 20px; font-weight: 300;
+    border: none; border-radius: 50%; font-size: 20px;
     cursor: pointer; z-index: 2; display: flex; justify-content: center; align-items: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15); transition: transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.2s;
   }
   .btn-open-modal:hover { transform: scale(1.1); }
 
-  /* In-Place Quick View Modal */
+  /* Quick view modal overlay */
   .wild-quick-view {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background-color: #fff; z-index: 5; display: none;
@@ -59,13 +55,13 @@
     border: 1px solid #eaeaea;
   }
 
-  /* Modal Close Button */
+  /* Close button */
   .btn-close-modal {
     position: absolute; top: 5px; right: 8px; background: none; border: none;
-    font-size: 16px; cursor: pointer; color: #000; z-index: 6; padding: 5px;
+    font-size: 16px; cursor: pointer; z-index: 6;
   }
 
-  /* Modal Top Info Area */
+  /* Modal info section */
   .modal-top-row {
     display: flex; gap: 12px; margin-bottom: 12px; height: auto;
   }
@@ -80,85 +76,64 @@
 
   .modal-title { font-size: 13px; font-weight: normal; color: #333; margin: 0 0 4px; }
   .modal-price { font-size: 14px; font-weight: 600; color: #000; margin: 0 0 6px; }
+  
   .modal-desc {
-    font-size: 11px; color: #666; line-height: 1.3; margin: 0;
+    font-size: 10px; color: #666; line-height: 1.3; margin: 0;
     display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
   }
 
-  /* Form Layout */
+  /* Form and inputs */
   .modal-form {
     display: flex; flex-direction: column; flex: 1; justify-content: space-between; gap: 8px;
   }
 
   .option-label { font-size: 11px; margin-bottom: 4px; color: #111; font-weight: 500; }
 
-  /* Color Selection Boxes */
+  /* Dynamic color boxes styling */
   .color-boxes {
     display: flex; border: 1px solid #111; height: 34px; width: 100%;
   }
 
   .color-box {
     flex: 1; display: flex; align-items: center; justify-content: center;
-    font-size: 11px; cursor: pointer; background: #fff; color: #111; transition: 0.2s;
+    font-size: 10px; cursor: pointer; background: #fff; color: #111; 
+    border-right: 1px solid #111; text-transform: uppercase;
   }
 
-  .color-box:first-child { border-right: 1px solid #111; }
+  .color-box:last-child { border-right: none; }
   .color-box.active { background: #111; color: #fff; font-weight: 600; }
 
-  /* Size Selection Dropdown */
+  /* Size select styling */
   .size-select-wrapper {
-    position: relative; height: 34px; border: 1px solid #111; background: #fff;
+    position: relative; height: 34px; border: 1px solid #111;
   }
 
   .size-select {
     width: 100%; height: 100%; padding: 0 10px; font-size: 11px; border: none;
-    background: transparent; appearance: none; outline: none; cursor: pointer; color: #111;
+    appearance: none; outline: none; cursor: pointer; background: transparent;
   }
 
   .select-chevron {
-    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
-    pointer-events: none; display: flex; align-items: center;
+    position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none;
   }
 
-  /* Modal Add to Cart Button */
+  /* Cart button */
   .btn-modal-cart {
     width: 100%; height: 42px; background: #111; color: #fff; border: none;
-    font-size: 11px; font-weight: 600; cursor: pointer; display: flex; 
-    align-items: center; justify-content: center; letter-spacing: 0.5px;
-    text-transform: uppercase; transition: 0.3s; margin-top: auto;
+    font-size: 11px; font-weight: 600; cursor: pointer; text-transform: uppercase;
+    display: flex; align-items: center; justify-content: center;
   }
-  .btn-modal-cart:hover { background: #333; }
 
-  /* Mobile Layout Enhancements */
+  /* Mobile responsive adjustments */
   @media screen and (max-width: 768px) {
     .wild-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .tisso-wild-section { padding: 40px 15px; }
-    
-    /* Increased height specifically for mobile to comfortably fit all Figma elements */
     .wild-grid-item { padding-top: 165%; } 
 
     .wild-quick-view { padding: 12px; }
-    .modal-top-row { gap: 10px; margin-bottom: 10px; }
-    .modal-thumbnail { width: 35%; aspect-ratio: 3/4; }
-    
-    .modal-title { font-size: 12px; margin-bottom: 2px; }
-    .modal-price { font-size: 13px; margin-bottom: 4px; }
-    
-    /* Description adjusted for tight mobile space */
-    .modal-desc { 
-      font-size: 10px; 
-      line-height: 1.25; 
-      -webkit-line-clamp: 3; 
-    }
-    
-    /* Compact form inputs for mobile */
-    .modal-form { gap: 6px; }
-    .option-label { font-size: 10px; margin-bottom: 2px; }
-    .color-boxes { height: 30px; }
-    .color-box { font-size: 10px; }
-    .size-select-wrapper { height: 30px; }
-    .size-select { font-size: 10px; }
-    .btn-modal-cart { height: 36px; font-size: 10px; margin-top: 4px; }
+    .modal-desc { font-size: 9px; -webkit-line-clamp: 4; }
+    .color-boxes, .size-select-wrapper { height: 30px; }
+    .btn-modal-cart { height: 36px; font-size: 10px; }
   }
 {% endstyle %}
 
@@ -170,7 +145,7 @@
   <div class="wild-grid">
     {% assign selected_collection = section.settings.collection %}
     
-    {% if selected_collection != blank and selected_collection.products_count > 0 %}
+    {% if selected_collection != blank %}
       {% for product in selected_collection.products limit: 6 %}
         
         <div class="wild-grid-item">
@@ -182,7 +157,7 @@
             <button class="btn-close-modal" type="button" onclick="closeModal('modal-{{ product.id }}')">&#10005;</button>
             
             <div class="modal-top-row">
-              <img src="{{ product.featured_image | image_url: width: 150 }}" alt="{{ product.title | escape }}" class="modal-thumbnail" width="150" height="200" loading="lazy">
+              <img src="{{ product.featured_image | image_url: width: 150 }}" class="modal-thumbnail" width="150" height="200" loading="lazy">
               <div class="modal-info">
                 <h3 class="modal-title">{{ product.title }}</h3>
                 <p class="modal-price">{{ product.price | money }}</p>
@@ -196,14 +171,13 @@
               <div>
                 <div class="option-label">Color</div>
                 <div class="color-boxes" id="color-box-{{ product.id }}">
-                  {% assign color_option = product.options_by_name['Color'] %}
-                  {% if color_option %}
-                    {% for value in color_option.values limit: 2 %}
+                  {% assign color_opt = product.options_by_name['Color'] %}
+                  {% if color_opt %}
+                    {% for value in color_opt.values limit: 2 %}
                       <div class="color-box {% if forloop.first %}active{% endif %}" onclick="selectColor(this, '{{ product.id }}')">{{ value }}</div>
                     {% endfor %}
                   {% else %}
-                    <div class="color-box active" onclick="selectColor(this, '{{ product.id }}')">White</div>
-                    <div class="color-box" onclick="selectColor(this, '{{ product.id }}')">Black</div>
+                    <div class="color-box active">Default</div>
                   {% endif %}
                 </div>
               </div>
@@ -213,16 +187,17 @@
                 <div class="size-select-wrapper">
                   <select class="size-select">
                     <option>Choose your size</option>
-                    <option>XS</option>
-                    <option>S</option>
-                    <option>M</option>
-                    <option>L</option>
-                    <option>XL</option>
+                    {% assign size_opt = product.options_by_name['Size'] %}
+                    {% if size_opt %}
+                      {% for value in size_opt.values %}
+                        <option>{{ value }}</option>
+                      {% endfor %}
+                    {% else %}
+                      <option>One Size</option>
+                    {% endif %}
                   </select>
                   <span class="select-chevron">
-                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M1 1L5 5L9 1" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#000" stroke-width="1.2"/></svg>
                   </span>
                 </div>
               </div>
@@ -231,31 +206,22 @@
                 ADD TO CART <span style="margin-left: 8px;">&rarr;</span>
               </button>
             </form>
-            
           </div>
         </div>
 
       {% endfor %}
-    {% else %}
-      <p>Please select a collection in the theme settings to display products.</p>
     {% endif %}
   </div>
 </div>
 
 <script>
-  function openModal(modalId) {
-    document.getElementById(modalId).style.display = 'flex';
-  }
-
-  function closeModal(modalId) {
-    document.getElementById(modalId).style.display = 'none';
-  }
-
-  function selectColor(element, productId) {
-    let container = document.getElementById('color-box-' + productId);
-    let boxes = container.querySelectorAll('.color-box');
-    boxes.forEach(box => box.classList.remove('active'));
-    element.classList.add('active');
+  function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+  function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+  
+  function selectColor(el, pid) {
+    let container = document.getElementById('color-box-' + pid);
+    container.querySelectorAll('.color-box').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
   }
 </script>
 
@@ -263,22 +229,9 @@
 {
   "name": "Tisso Wild Grid",
   "settings": [
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Section Heading",
-      "default": "Tisso vison in the wild"
-    },
-    {
-      "type": "collection",
-      "id": "collection",
-      "label": "Select Collection"
-    }
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Tisso vision in the wild" },
+    { "type": "collection", "id": "collection", "label": "Collection" }
   ],
-  "presets": [
-    {
-      "name": "Tisso Wild Grid"
-    }
-  ]
+  "presets": [{ "name": "Tisso Wild Grid" }]
 }
 {% endschema %}
