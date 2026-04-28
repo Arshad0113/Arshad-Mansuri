@@ -1,0 +1,214 @@
+{% style %}
+  /* --- Global Grid Section Styling --- */
+  .custom-grid-section {
+    padding: 60px 8%;
+    background-color: #ffffff;
+    font-family: 'Instrument Sans', sans-serif;
+  }
+
+  .grid-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  .grid-header h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+  }
+
+  .grid-header a {
+    font-size: 14px;
+    color: #000;
+    text-decoration: none;
+    border-bottom: 1px solid #000;
+  }
+
+  /* --- 3-Column Grid Layout --- */
+  .product-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  /* --- Product Card Styling --- */
+  .custom-product-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-image-wrapper {
+    position: relative;
+    background-color: #f5f5f5;
+    padding-top: 120%; /* Creates a nice vertical rectangle shape */
+    overflow: hidden;
+    border-radius: 4px;
+    margin-bottom: 15px;
+  }
+
+  .product-image-wrapper img, 
+  .product-image-wrapper svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Plus (+) Add to Cart Button */
+  .grid-add-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    z-index: 2;
+  }
+
+  .grid-add-btn:hover {
+    background-color: #000;
+    color: #fff;
+    transform: scale(1.1);
+  }
+
+  /* Product Details */
+  .product-info-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .product-title-grid {
+    font-size: 15px;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 5px 0;
+    text-decoration: none;
+  }
+
+  .product-price-grid {
+    font-size: 15px;
+    color: #555;
+    margin: 0;
+  }
+
+  .product-colors {
+    font-size: 12px;
+    color: #888;
+  }
+
+  /* --- Mobile Layout (2 Columns) --- */
+  @media screen and (max-width: 768px) {
+    .product-grid-container {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    .custom-grid-section {
+      padding: 40px 20px;
+    }
+    .grid-header h2 {
+      font-size: 22px;
+    }
+  }
+
+  /* --- Mobile Layout (1 Column for very small screens) --- */
+  @media screen and (max-width: 480px) {
+    .product-grid-container {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstyle %}
+
+<div class="custom-grid-section">
+  <div class="grid-header">
+    <h2>{{ section.settings.title }}</h2>
+    <a href="{{ section.settings.collection.url | default: '#' }}">View All</a>
+  </div>
+
+  <div class="product-grid-container">
+    {% assign selected_collection = section.settings.collection %}
+    
+    {% if selected_collection != blank and selected_collection.products_count > 0 %}
+      {% for product in selected_collection.products limit: 6 %}
+        <div class="custom-product-card">
+          
+          <div class="product-image-wrapper">
+            <a href="{{ product.url }}">
+              <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}">
+            </a>
+            
+            <form method="post" action="/cart/add">
+              <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+              <button type="submit" class="grid-add-btn" title="Add to Cart">+</button>
+            </form>
+          </div>
+
+          <div class="product-info-grid">
+            <div>
+              <a href="{{ product.url }}" class="product-title-grid">{{ product.title }}</a>
+              <div class="product-colors">{{ product.options_by_name['Color'].values.size | default: '1' }} Colors</div>
+            </div>
+            <p class="product-price-grid">{{ product.price | money }}</p>
+          </div>
+
+        </div>
+      {% endfor %}
+    {% else %}
+      {% for i in (1..6) %}
+        <div class="custom-product-card">
+          <div class="product-image-wrapper">
+            {{ 'product-' | append: i | placeholder_svg_tag }}
+            <button class="grid-add-btn">+</button>
+          </div>
+          <div class="product-info-grid">
+            <div>
+              <p class="product-title-grid">Sample Product {{ i }}</p>
+              <div class="product-colors">2 Colors</div>
+            </div>
+            <p class="product-price-grid">$99.00</p>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Product Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Our Bestsellers"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Select Collection to Display"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Product Grid"
+    }
+  ]
+}
+{% endschema %}
