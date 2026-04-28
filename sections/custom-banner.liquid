@@ -77,7 +77,6 @@
     background-size: cover; 
     background-position: center center;
     background-repeat: no-repeat;
-    /* Left padding 8% se 4% ki taaki text halka sa left shift ho */
     padding: 60px 8% 40px 4%; 
   }
 
@@ -100,6 +99,13 @@
     color: #000;
     line-height: 1.5;
     margin-bottom: 25px; 
+  }
+
+  /* Wrapper to center the button under text on desktop */
+  .btn-shop-now-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 
   /* Primary Shop Now button */
@@ -170,11 +176,11 @@
     /* Banner adjustments for mobile */
     .tisso-main-banner {
       background-position: bottom center; 
-      /* Image ko halka sa zoom kiya (100% se 125%) */
-      background-size: 125% auto; 
+      /* Image ko aur zyada zoom kiya (160%) */
+      background-size: 160% auto; 
       align-items: flex-start; 
       padding: 50px 20px; 
-      min-height: 550px;
+      min-height: 580px; /* Thodi height badhai taaki button niche set ho sake */
     }
     
     .banner-content-box {
@@ -190,14 +196,17 @@
       margin-bottom: 0;
     }
 
-    /* Shop Now button perfectly placed in the middle of mobile background */
-    .btn-shop-now {
+    /* Shop Now button perfectly placed further down on the zoomed mobile background */
+    .btn-shop-now-wrapper {
       position: absolute;
-      bottom: 140px; /* image ke theek beech me */
+      bottom: 90px; /* 140px se kam karke aur niche kiya */
       left: 50%;
       transform: translateX(-50%);
+      width: auto;
+    }
+    .btn-shop-now {
       white-space: nowrap;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15); /* Haldi si shadow jisse button image pe clear dikhe */
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15); 
     }
   }
 {% endstyle %}
@@ -221,9 +230,11 @@
       <p>{{ section.settings.subtext }}</p>
       
       {% if section.settings.btn_text != blank %}
-        <a href="{{ section.settings.btn_link }}" class="btn-shop-now">
-          {{ section.settings.btn_text }} <span>&rarr;</span>
-        </a>
+        <div class="btn-shop-now-wrapper">
+          <a href="{{ section.settings.btn_link }}" class="btn-shop-now">
+            {{ section.settings.btn_text }} <span>&rarr;</span>
+          </a>
+        </div>
       {% endif %}
     </div>
   </section>
