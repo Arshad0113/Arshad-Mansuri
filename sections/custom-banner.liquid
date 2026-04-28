@@ -69,15 +69,15 @@
   .tisso-main-banner {
     position: relative;
     width: 100%;
-    min-height: 550px;
+    min-height: 580px;
     display: flex;
-    align-items: center;
+    align-items: flex-end; /* Text ko neeche khali jagah me shift karne ke liye */
     background-color: #ffffff;
     background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}');
     background-size: cover; 
-    background-position: right center;
+    background-position: center center;
     background-repeat: no-repeat;
-    padding: 60px 8%;
+    padding: 60px 8% 80px 8%; /* Bottom padding text ko thoda upar rakhne ke liye */
   }
 
   /* Banner content container */
@@ -166,19 +166,19 @@
       display: none; 
     }
 
-    /* Banner adjustments */
+    /* Banner adjustments for mobile */
     .tisso-main-banner {
       background-position: right center;
       background-size: cover;
-      align-items: flex-start;
-      padding: 80px 20px 40px 20px;
+      align-items: center; /* Mobile me vertically center */
+      padding: 60px 20px;
       min-height: 480px;
     }
     
     .banner-content-box {
-      max-width: 90%;
-      text-align: left; 
-      padding-left: 10px; 
+      max-width: 100%;
+      text-align: center; /* Mobile me text center me */
+      margin: 0 auto; 
     }
     .banner-content-box h1 {
       font-size: 42px;
