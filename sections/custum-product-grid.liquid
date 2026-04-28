@@ -85,7 +85,7 @@
                   {% assign color_opt = product.options_by_name['Color'] %}
                   {% if color_opt %}
                     {% for value in color_opt.values limit: 2 %}
-                      <div class="color-box {% if forloop.first %}active{% endif %}" data-val="{{ value }}" onclick="selectColor(this, '{{ product.id }}')">{{ value }}</div>
+                      <div class="color-box {% if forloop.first %}active{% endif %}" data-val="{{ value | escape }}" onclick="selectColor(this, '{{ product.id }}')">{{ value }}</div>
                     {% endfor %}
                   {% else %}
                     <div class="color-box active" data-val="White" onclick="selectColor(this, '{{ product.id }}')">White</div>
@@ -98,15 +98,19 @@
                 <div class="option-label">Size</div>
                 <div class="size-select-wrapper">
                   <select class="size-select" id="size-{{ product.id }}" onchange="updateVariant('{{ product.id }}')">
+                    <option value="" disabled selected>Choose your size</option>
                     {% assign size_opt = product.options_by_name['Size'] %}
-                    {% if size_opt %}
+                    {% if size_opt and size_opt.values.size > 0 %}
                       {% for value in size_opt.values %}
-                        <option value="{{ value }}">{{ value }}</option>
+                        <option value="{{ value | escape }}">{{ value }}</option>
                       {% endfor %}
                     {% else %}
+                      <option value="XS">XS</option>
                       <option value="S">S</option>
                       <option value="M">M</option>
                       <option value="L">L</option>
+                      <option value="XL">XL</option>
+                      <option value="XXL">XXL</option>
                     {% endif %}
                   </select>
                   <span class="select-chevron">
@@ -139,21 +143,30 @@
   }
 
   function updateVariant(pid) {
-    let variants = JSON.parse(document.getElementById('variants-' + pid).textContent);
+    let variantsText = document.getElementById('variants-' + pid).textContent;
+    if(!variantsText) return;
+    
+    let variants = JSON.parse(variantsText);
     let activeColorBox = document.querySelector('#color-box-' + pid + ' .active');
     let color = activeColorBox ? activeColorBox.getAttribute('data-val') : null;
-    let size = document.getElementById('size-' + pid).value;
+    let sizeSelect = document.getElementById('size-' + pid);
+    let size = sizeSelect ? sizeSelect.value : null;
     
     // Find matching variant dynamically
-    let matched = variants.find(v => v.options.includes(color) && v.options.includes(size));
+    let matched = variants.find(v => {
+      let matchColor = color ? v.options.includes(color) : true;
+      let matchSize = size && size !== "" ? v.options.includes(size) : true;
+      return matchColor && matchSize;
+    });
+    
     if (matched) {
       document.getElementById('selected-variant-' + pid).value = matched.id;
     }
   }
 
-  // The Magic Logic: AJAX API to add multiple items
+  // API Logic for adding items (Including the Bonus Jacket requirement)
   function handleAjaxCart(event, pid) {
-    event.preventDefault(); // Stop normal form submit
+    event.preventDefault(); 
     
     let btn = document.getElementById('btn-' + pid);
     btn.innerHTML = 'ADDING...';
@@ -161,7 +174,10 @@
     let variantId = document.getElementById('selected-variant-' + pid).value;
     let activeColorBox = document.querySelector('#color-box-' + pid + ' .active');
     let color = activeColorBox ? activeColorBox.getAttribute('data-val').toLowerCase() : '';
-    let size = document.getElementById('size-' + pid).value.toLowerCase();
+    
+    let sizeSelect = document.getElementById('size-' + pid);
+    let size = sizeSelect && sizeSelect.value ? sizeSelect.value.toLowerCase() : '';
+    
     let bonusJacketId = document.getElementById('bonus-jacket-id').value;
     
     let itemsToAdd = [{ id: parseInt(variantId), quantity: 1 }];
@@ -178,9 +194,9 @@
     })
     .then(response => {
       if(response.ok) {
-        window.location.href = '/cart'; // Redirect to cart to prove it worked
+        window.location.href = '/cart'; // Redirect to cart
       } else {
-        alert("Error adding item to cart.");
+        alert("Error adding item to cart. Please ensure you selected a size.");
         btn.innerHTML = 'ADD TO CART &rarr;';
       }
     })
