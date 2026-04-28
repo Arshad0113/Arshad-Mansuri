@@ -1,228 +1,58 @@
 {% style %}
-  /* Main wrapper for typography and layout */
-  .tisso-banner-wrapper {
-    font-family: 'Instrument Sans', sans-serif;
-    width: 100%;
-    overflow: hidden;
-    background-color: #ffffff;
-  }
+  .tisso-banner-wrapper { font-family: 'Instrument Sans', sans-serif; width: 100%; overflow: hidden; background-color: #ffffff; }
+  .tisso-top-bar { display: flex; justify-content: space-between; align-items: center; padding: 12px 40px; background-color: #fafafa; border-bottom: 1px solid #eaeaea; position: relative; }
+  .mobile-menu-icon { display: none; font-size: 22px; cursor: pointer; color: #000; }
+  .top-bar-left { font-size: 16px; font-weight: 700; letter-spacing: 1px; color: #000; text-transform: uppercase; flex: 1; }
+  .top-bar-center { font-size: 13px; color: #000; text-align: center; flex: 2; }
+  .top-bar-right { flex: 1; text-align: right; }
+  .btn-choose-gift { display: inline-block; background-color: #fced4e; color: #000; text-decoration: none; padding: 10px 24px; font-weight: 500; font-size: 12px; text-transform: uppercase; transition: transform 0.3s ease; }
+  .btn-choose-gift:hover { transform: scale(1.05); }
 
-  /* Top announcement bar layout */
-  .tisso-top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 40px;
-    background-color: #fafafa;
-    border-bottom: 1px solid #eaeaea;
-    position: relative;
-  }
-
-  /* Hamburger icon for mobile view */
-  .mobile-menu-icon {
-    display: none;
-    font-size: 22px;
-    cursor: pointer;
-    color: #000;
-  }
-
-  /* Top bar text alignments */
-  .top-bar-left {
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    color: #000;
-    text-transform: uppercase;
-    flex: 1;
-  }
-
-  .top-bar-center {
-    font-size: 13px;
-    color: #000;
-    text-align: center;
-    flex: 2;
-  }
-
-  .top-bar-right {
-    flex: 1;
-    text-align: right;
-  }
-
-  /* Top bar CTA button */
-  .btn-choose-gift {
-    display: inline-block;
-    background-color: #fced4e;
-    color: #000;
-    text-decoration: none;
-    padding: 10px 24px;
-    font-weight: 500;
-    font-size: 12px;
-    text-transform: uppercase;
-    transition: transform 0.3s ease;
-  }
-
-  .btn-choose-gift:hover {
-    transform: scale(1.05);
-  }
-
-  /* Hero banner background and alignment */
   .tisso-main-banner {
-    position: relative;
-    width: 100%;
-    min-height: 600px; 
-    display: flex;
-    align-items: flex-end; 
-    background-color: #ffffff;
-    background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}');
-    background-size: cover; 
-    background-position: center center;
-    background-repeat: no-repeat;
+    position: relative; width: 100%; min-height: 600px; display: flex; align-items: flex-end; 
+    background-color: #ffffff; background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}');
+    background-size: cover; background-position: center center; background-repeat: no-repeat;
     padding: 60px 8% 40px 4%; 
   }
-
-  /* Banner content container */
-  .banner-content-box {
-    max-width: 450px; 
-    z-index: 2;
-  }
-
-  .banner-content-box h1 {
-    font-size: 60px;
-    font-weight: 600;
-    color: #000;
-    line-height: 1.1;
-    margin-bottom: 15px; 
-  }
-
-  .banner-content-box p {
-    font-size: 16px;
-    color: #000;
-    line-height: 1.5;
-    margin-bottom: 25px; 
-  }
-
-  /* Wrapper to center the button under text on desktop */
-  .btn-shop-now-wrapper {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-
-  /* Primary Shop Now button */
+  .banner-content-box { max-width: 450px; z-index: 2; }
+  .banner-content-box h1 { font-size: 60px; font-weight: 600; color: #000; line-height: 1.1; margin-bottom: 15px; }
+  .banner-content-box p { font-size: 16px; color: #000; line-height: 1.5; margin-bottom: 25px; }
+  
+  .btn-shop-now-wrapper { display: flex; justify-content: center; width: 100%; }
   .btn-shop-now {
-    display: inline-flex;
-    align-items: center;
-    background-color: #000;
-    color: #fff;
-    text-decoration: none;
-    padding: 16px 36px;
-    font-weight: 500;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
+    display: inline-flex; align-items: center; background-color: #000; color: #fff; text-decoration: none;
+    padding: 16px 36px; font-weight: 500; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease;
   }
+  .btn-shop-now span { margin-left: 10px; transition: transform 0.3s ease; }
+  .btn-shop-now:hover { background-color: #fced4e; color: #000; }
+  .btn-shop-now:hover span { transform: translateX(5px); }
 
-  .btn-shop-now span {
-    margin-left: 10px;
-    transition: transform 0.3s ease;
-  }
+  .tisso-bottom-bar { text-align: center; padding: 15px 20px; background-color: #fff; border-top: 1px solid #eaeaea; border-bottom: 1px solid #eaeaea; font-size: 11px; font-weight: 600; color: #333; text-transform: uppercase; letter-spacing: 1px; }
 
-  .btn-shop-now:hover {
-    background-color: #fced4e;
-    color: #000;
-  }
-
-  .btn-shop-now:hover span {
-    transform: translateX(5px);
-  }
-
-  /* Bottom notification bar */
-  .tisso-bottom-bar {
-    text-align: center;
-    padding: 15px 20px;
-    background-color: #fff;
-    border-top: 1px solid #eaeaea;
-    border-bottom: 1px solid #eaeaea;
-    font-size: 11px;
-    font-weight: 600;
-    color: #333;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  /* Mobile responsiveness max 768px */
   @media screen and (max-width: 768px) {
-    /* Navbar adjustments */
-    .tisso-top-bar {
-      flex-direction: row;
-      justify-content: center;
-      padding: 15px 20px;
-    }
-    .mobile-menu-icon {
-      display: block; 
-      position: absolute;
-      left: 20px;
-    }
-    .top-bar-left {
-      text-align: center;
-      flex: none;
-      font-size: 18px; 
-    }
-    .top-bar-center, .top-bar-right {
-      display: none; 
-    }
-
-    /* Banner adjustments for mobile */
+    .tisso-top-bar { flex-direction: row; justify-content: center; padding: 15px 20px; }
+    .mobile-menu-icon { display: block; position: absolute; left: 20px; }
+    .top-bar-left { text-align: center; flex: none; font-size: 18px; }
+    .top-bar-center, .top-bar-right { display: none; }
     .tisso-main-banner {
-      background-position: bottom center; 
-      background-size: 150% auto; 
-      align-items: flex-start; 
-      /* Text ko upar khiska diya (80px se 25px kar diya) */
-      padding: 25px 20px; 
-      /* Height badha di taaki background image niche fit ho */
-      min-height: 650px; 
+      background-position: bottom center; background-size: 160% auto; align-items: flex-start; 
+      padding: 80px 20px; min-height: 580px; 
     }
-    
-    .banner-content-box {
-      max-width: 100%;
-      text-align: center; 
-      margin: 0 auto; 
-    }
-    .banner-content-box h1 {
-      font-size: 38px;
-      margin-bottom: 15px;
-    }
-    .banner-content-box p {
-      font-size: 15px;
-      margin-bottom: 0;
-    }
-
-    /* Shop Now button */
-    .btn-shop-now-wrapper {
-      position: absolute;
-      bottom: 80px; 
-      left: 50%;
-      transform: translateX(-50%);
-      width: auto;
-    }
-    .btn-shop-now {
-      white-space: nowrap;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15); 
-    }
+    .banner-content-box { max-width: 100%; text-align: center; margin: 0 auto; }
+    .banner-content-box h1 { font-size: 38px; }
+    .banner-content-box p { font-size: 15px; margin-bottom: 0; }
+    .btn-shop-now-wrapper { position: absolute; bottom: 90px; left: 50%; transform: translateX(-50%); width: auto; }
+    .btn-shop-now { white-space: nowrap; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
   }
 {% endstyle %}
 
 <div class="tisso-banner-wrapper">
-  
   <div class="tisso-top-bar">
     <div class="mobile-menu-icon">&#9776;</div>
     <div class="top-bar-left">{{ section.settings.top_left_text }}</div>
     <div class="top-bar-center">{{ section.settings.top_center_text }}</div>
     <div class="top-bar-right">
-      <a href="{{ section.settings.top_btn_link }}" class="btn-choose-gift">
-        {{ section.settings.top_btn_text }} &rarr;
-      </a>
+      <a href="{{ section.settings.top_btn_link }}" class="btn-choose-gift">{{ section.settings.top_btn_text }} &rarr;</a>
     </div>
   </div>
 
@@ -230,101 +60,32 @@
     <div class="banner-content-box">
       <h1>{{ section.settings.heading }}</h1>
       <p>{{ section.settings.subtext }}</p>
-      
       {% if section.settings.btn_text != blank %}
         <div class="btn-shop-now-wrapper">
-          <a href="{{ section.settings.btn_link }}" class="btn-shop-now">
-            {{ section.settings.btn_text }} <span>&rarr;</span>
-          </a>
+          <a href="{{ section.settings.btn_link }}" class="btn-shop-now">{{ section.settings.btn_text }} <span>&rarr;</span></a>
         </div>
       {% endif %}
     </div>
   </section>
 
-  <div class="tisso-bottom-bar">
-    {{ section.settings.bottom_text }}
-  </div>
-
+  <div class="tisso-bottom-bar">{{ section.settings.bottom_text }}</div>
 </div>
 
 {% schema %}
 {
   "name": "Custom Banner",
   "settings": [
-    {
-      "type": "header",
-      "content": "Top Bar Settings"
-    },
-    {
-      "type": "text",
-      "id": "top_left_text",
-      "label": "Top Left Text",
-      "default": "TISSO VISON"
-    },
-    {
-      "type": "text",
-      "id": "top_center_text",
-      "label": "Top Center Text",
-      "default": "Find the ideal gift for your loved ones."
-    },
-    {
-      "type": "text",
-      "id": "top_btn_text",
-      "label": "Top Button Text",
-      "default": "CHOOSE GIFT"
-    },
-    {
-      "type": "url",
-      "id": "top_btn_link",
-      "label": "Top Button Link"
-    },
-    {
-      "type": "header",
-      "content": "Main Banner Settings"
-    },
-    {
-      "type": "image_picker",
-      "id": "bg_image",
-      "label": "Background Sketch Image"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "The Gift Guide"
-    },
-    {
-      "type": "textarea",
-      "id": "subtext",
-      "label": "Subtext",
-      "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season."
-    },
-    {
-      "type": "text",
-      "id": "btn_text",
-      "label": "Main Button Text",
-      "default": "SHOP NOW"
-    },
-    {
-      "type": "url",
-      "id": "btn_link",
-      "label": "Main Button Link"
-    },
-    {
-      "type": "header",
-      "content": "Bottom Bar Settings"
-    },
-    {
-      "type": "text",
-      "id": "bottom_text",
-      "label": "Bottom Bar Text",
-      "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
-    }
+    { "type": "text", "id": "top_left_text", "label": "Top Left Text", "default": "TISSO VISON" },
+    { "type": "text", "id": "top_center_text", "label": "Top Center Text", "default": "Find the ideal gift for your loved ones." },
+    { "type": "text", "id": "top_btn_text", "label": "Top Button Text", "default": "CHOOSE GIFT" },
+    { "type": "url", "id": "top_btn_link", "label": "Top Button Link" },
+    { "type": "image_picker", "id": "bg_image", "label": "Background Image" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The Gift Guide" },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Discover Joy: Your Ultimate Holiday Gift Destination." },
+    { "type": "text", "id": "btn_text", "label": "Main Button Text", "default": "SHOP NOW" },
+    { "type": "url", "id": "btn_link", "label": "Main Button Link" },
+    { "type": "text", "id": "bottom_text", "label": "Bottom Text", "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL" }
   ],
-  "presets": [
-    {
-      "name": "Custom Banner"
-    }
-  ]
+  "presets": [{ "name": "Custom Banner" }]
 }
 {% endschema %}
