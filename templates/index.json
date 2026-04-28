@@ -14,7 +14,7 @@
       "custom_css": [],
       "name": "Custom Banner",
       "settings": {
-        "top_left_text": "TISSO VISON",
+        "top_left_text": "TISSO VISION",
         "top_center_text": "Find the ideal gift for your loved ones.",
         "top_btn_text": "CHOOSE GIFT",
         "top_btn_link": "",
@@ -31,7 +31,8 @@
       "name": "Tisso Wild Grid",
       "settings": {
         "heading": "Tisso vison in the wild",
-        "collection": "grid-products"
+        "collection": "grid-products",
+        "bonus_product": ""
       }
     }
   },
