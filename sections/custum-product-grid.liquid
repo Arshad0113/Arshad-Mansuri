@@ -2,7 +2,7 @@
   /* --- Section & Grid Layout --- */
   .tisso-wild-section {
     padding: 60px 8%;
-    background-color: #f4f4f4; /* Light grey background from Figma */
+    background-color: #f4f4f4;
     font-family: 'Instrument Sans', sans-serif;
   }
 
@@ -16,16 +16,15 @@
     font-weight: 400;
     color: #121212;
     margin: 0;
-    font-family: serif; /* Figma heading has a slightly classic serif look */
+    font-family: serif;
   }
 
   .wild-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 15px; /* Small gap like Figma */
+    gap: 15px;
   }
 
-  /* --- Grid Item & Image --- */
   .wild-grid-item {
     position: relative;
     background-color: #fff;
@@ -36,190 +35,105 @@
 
   .wild-grid-item > img {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
+    top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover; z-index: 1;
   }
 
-  /* Plus (+) Button on Image */
   .btn-open-modal {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    width: 35px;
-    height: 35px;
-    background-color: #fff;
-    color: #000;
-    border: none;
-    border-radius: 50%;
-    font-size: 20px;
-    font-weight: 300;
-    cursor: pointer;
-    z-index: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.2s ease;
+    position: absolute; bottom: 20px; right: 20px;
+    width: 35px; height: 35px; background-color: #fff; color: #000;
+    border: none; border-radius: 50%; font-size: 20px; font-weight: 300;
+    cursor: pointer; z-index: 2; display: flex; justify-content: center; align-items: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s ease;
   }
+  .btn-open-modal:hover { transform: scale(1.1); }
 
-  .btn-open-modal:hover {
-    transform: scale(1.1);
-  }
-
-  /* --- In-Place Quick View Modal (The Card Overlay) --- */
+  /* --- In-Place Quick View Modal (NO SCROLL DESIGN) --- */
   .wild-quick-view {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    z-index: 5;
-    display: none; /* Hidden by default */
-    flex-direction: column;
-    padding: 20px;
-    box-sizing: border-box;
-    overflow-y: auto;
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: #fff; z-index: 5; display: none;
+    flex-direction: column; padding: 15px; box-sizing: border-box;
   }
 
-  /* Close (x) Button */
   .btn-close-modal {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    color: #000;
-    z-index: 6;
+    position: absolute; top: 10px; right: 10px; background: none; border: none;
+    font-size: 16px; cursor: pointer; color: #000; z-index: 6; padding: 5px;
   }
 
-  /* Modal Content Styling (Figma Match) */
+  /* Top Area: Image + Info */
   .modal-top-row {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 15px;
+    display: flex; gap: 12px; height: 35%; margin-bottom: 12px;
   }
 
   .modal-thumbnail {
-    width: 80px;
-    height: 100px;
-    object-fit: cover;
+    width: 45%; height: 100%; object-fit: cover;
   }
 
-  .modal-title-price {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  .modal-info {
+    width: 55%; display: flex; flex-direction: column; justify-content: flex-start;
   }
 
-  .modal-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: #333;
-    margin: 0 0 5px 0;
-  }
-
-  .modal-price {
-    font-size: 14px;
-    font-weight: 600;
-    color: #000;
-    margin: 0;
-  }
-
+  .modal-title { font-size: 13px; font-weight: normal; color: #333; margin: 0 0 4px; }
+  .modal-price { font-size: 14px; font-weight: 600; color: #000; margin: 0 0 4px; }
+  
   .modal-desc {
-    font-size: 11px;
-    color: #666;
-    line-height: 1.4;
-    margin-bottom: 15px;
+    font-size: 10px; color: #666; line-height: 1.3; margin: 0;
+    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
   }
 
-  /* Form Elements (Color & Size) */
+  /* Form Elements */
   .modal-form {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+    display: flex; flex-direction: column; flex: 1; justify-content: space-between;
   }
 
-  .option-label {
-    font-size: 12px;
-    margin-bottom: 5px;
-    color: #000;
-  }
+  .option-label { font-size: 11px; margin-bottom: 5px; color: #333; }
 
+  /* Color Buttons (Clickable Fix) */
   .color-boxes {
-    display: flex;
-    border: 1px solid #ddd;
-    margin-bottom: 15px;
+    display: flex; border: 1px solid #ccc; height: 32px;
   }
 
   .color-box {
-    flex: 1;
-    text-align: center;
-    padding: 8px 0;
-    font-size: 12px;
-    border-right: 1px solid #ddd;
-    cursor: pointer;
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    font-size: 12px; cursor: pointer; background: #fff; color: #000; transition: 0.2s;
   }
 
-  .color-box:last-child {
-    border-right: none;
+  .color-box:first-child { border-right: 1px solid #ccc; }
+  
+  /* Active Class for selected color (Figma match) */
+  .color-box.active { background: #000; color: #fff; font-weight: 600; }
+
+  /* Size Dropdown (Figma Match) */
+  .size-select-wrapper {
+    position: relative; height: 35px; border: 1px solid #ccc; background: #fff;
   }
 
   .size-select {
-    width: 100%;
-    padding: 10px;
-    font-size: 12px;
-    border: 1px solid #ddd;
-    margin-bottom: auto; /* Pushes button to bottom */
-    background: #fff;
-    outline: none;
+    width: 100%; height: 100%; padding: 0 10px; font-size: 12px; border: none;
+    background: transparent; appearance: none; outline: none; cursor: pointer; color: #000;
   }
 
-  /* Add to Cart Button */
+  .select-chevron {
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    font-size: 12px; pointer-events: none; color: #000;
+  }
+
+  /* Cart Button */
   .btn-modal-cart {
-    width: 100%;
-    background-color: #000;
-    color: #fff;
-    border: none;
-    padding: 15px 0;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    cursor: pointer;
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background 0.3s;
+    width: 100%; height: 42px; background: #000; color: #fff; border: none;
+    font-size: 11px; font-weight: 600; cursor: pointer; display: flex; 
+    align-items: center; justify-content: center; letter-spacing: 0.5px;
+    text-transform: uppercase; transition: 0.3s;
   }
+  .btn-modal-cart:hover { background: #333; }
 
-  .btn-modal-cart span {
-    margin-left: 10px;
-  }
-
-  .btn-modal-cart:hover {
-    background-color: #333;
-  }
-
-  /* --- Mobile Responsive --- */
+  /* Responsive Adjustments */
   @media screen and (max-width: 768px) {
-    .wild-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .tisso-wild-section {
-      padding: 40px 20px;
-    }
+    .wild-grid { grid-template-columns: repeat(2, 1fr); }
+    .tisso-wild-section { padding: 40px 20px; }
   }
   @media screen and (max-width: 480px) {
-    .wild-grid {
-      grid-template-columns: 1fr;
-    }
+    .wild-grid { grid-template-columns: 1fr; }
   }
 {% endstyle %}
 
@@ -240,39 +154,44 @@
           <button class="btn-open-modal" onclick="openModal('modal-{{ product.id }}')">+</button>
 
           <div class="wild-quick-view" id="modal-{{ product.id }}">
-            <button class="btn-close-modal" onclick="closeModal('modal-{{ product.id }}')">&#10005;</button>
+            <button class="btn-close-modal" type="button" onclick="closeModal('modal-{{ product.id }}')">&#10005;</button>
             
             <div class="modal-top-row">
               <img src="{{ product.featured_image | image_url: width: 150 }}" alt="{{ product.title | escape }}" class="modal-thumbnail" width="150" height="200" loading="lazy">
-              <div class="modal-title-price">
+              <div class="modal-info">
                 <h3 class="modal-title">{{ product.title }}</h3>
                 <p class="modal-price">{{ product.price | money }}</p>
+                <div class="modal-desc">{{ product.description | strip_html | truncatewords: 12 }}</div>
               </div>
-            </div>
-
-            <div class="modal-desc">
-              {{ product.description | strip_html | truncatewords: 15 }}
             </div>
 
             <form method="post" action="{{ routes.cart_add_url }}" class="modal-form">
               <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
 
-              <div class="option-label">Color</div>
-              <div class="color-boxes">
-                <div class="color-box" style="font-weight: 600; border-right: 2px solid #000;">White</div>
-                <div class="color-box">Black</div>
+              <div>
+                <div class="option-label">Color</div>
+                <div class="color-boxes" id="color-box-{{ product.id }}">
+                  <div class="color-box active" onclick="selectColor(this, '{{ product.id }}')">White</div>
+                  <div class="color-box" onclick="selectColor(this, '{{ product.id }}')">Black</div>
+                </div>
               </div>
 
-              <div class="option-label">Size</div>
-              <select class="size-select">
-                <option>Choose your size</option>
-                <option>Small</option>
-                <option>Medium</option>
-                <option>Large</option>
-              </select>
+              <div>
+                <div class="option-label">Size</div>
+                <div class="size-select-wrapper">
+                  <select class="size-select">
+                    <option>Choose your size</option>
+                    <option>XS</option>
+                    <option>S</option>
+                    <option>M</option>
+                    <option>L</option>
+                    <option>XL</option>
+                  </select>
+                  <span class="select-chevron">&#8964;</span> </div>
+              </div>
 
               <button type="submit" class="btn-modal-cart">
-                ADD TO CART <span>&rarr;</span>
+                ADD TO CART <span style="margin-left: 8px;">&rarr;</span>
               </button>
             </form>
             
@@ -293,6 +212,19 @@
 
   function closeModal(modalId) {
     document.getElementById(modalId).style.display = 'none';
+  }
+
+  // Color Box Click Logic
+  function selectColor(element, productId) {
+    // 1. Us product ke dono boxes dhoondho
+    let container = document.getElementById('color-box-' + productId);
+    let boxes = container.querySelectorAll('.color-box');
+    
+    // 2. Sabme se 'active' class hata do (safed kar do)
+    boxes.forEach(box => box.classList.remove('active'));
+    
+    // 3. Jis par click hua hai, us par 'active' class laga do (kaala kar do)
+    element.classList.add('active');
   }
 </script>
 
