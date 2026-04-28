@@ -150,10 +150,10 @@
           
           <div class="product-image-wrapper">
             <a href="{{ product.url }}">
-              <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}">
+              <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" width="600" height="720" loading="lazy">
             </a>
             
-            <form method="post" action="/cart/add">
+            <form method="post" action="{{ routes.cart_add_url }}">
               <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
               <button type="submit" class="grid-add-btn" title="Add to Cart">+</button>
             </form>
