@@ -173,17 +173,15 @@
       display: none; 
     }
 
-    /* Banner adjustments for mobile with zoom and centered, higher text */
+    /* Banner adjustments for mobile */
     .tisso-main-banner {
       background-position: bottom center; 
-      /* Large zoom as requested */
-      background-size: 160% auto; 
-      /* Align text box to the top on mobile to avoid overlap and give more space */
+      background-size: 150% auto; 
       align-items: flex-start; 
-      /* Padding-top increased slightly to push text block down from navbar, 
-         while alignment pushes the block higher up overall to correct overlap */
-      padding: 80px 20px; 
-      min-height: 580px; 
+      /* Text ko upar khiska diya (80px se 25px kar diya) */
+      padding: 25px 20px; 
+      /* Height badha di taaki background image niche fit ho */
+      min-height: 650px; 
     }
     
     .banner-content-box {
@@ -193,16 +191,17 @@
     }
     .banner-content-box h1 {
       font-size: 38px;
+      margin-bottom: 15px;
     }
     .banner-content-box p {
       font-size: 15px;
       margin-bottom: 0;
     }
 
-    /* Shop Now button perfectly placed further down on the zoomed mobile background */
+    /* Shop Now button */
     .btn-shop-now-wrapper {
       position: absolute;
-      bottom: 90px; 
+      bottom: 80px; 
       left: 50%;
       transform: translateX(-50%);
       width: auto;
