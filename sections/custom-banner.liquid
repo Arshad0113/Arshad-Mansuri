@@ -69,15 +69,15 @@
   .tisso-main-banner {
     position: relative;
     width: 100%;
-    min-height: 580px;
+    min-height: 600px; /* Height thodi badhai taaki aur niche ja sake */
     display: flex;
-    align-items: flex-end; /* Text ko neeche khali jagah me shift karne ke liye */
+    align-items: flex-end; /* Text ko bottom me rakhne ke liye */
     background-color: #ffffff;
     background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}');
     background-size: cover; 
     background-position: center center;
     background-repeat: no-repeat;
-    padding: 60px 8% 80px 8%; /* Bottom padding text ko thoda upar rakhne ke liye */
+    padding: 60px 8% 40px 8%; /* Bottom padding kam ki taaki text aur niche jaye */
   }
 
   /* Banner content container */
@@ -91,14 +91,14 @@
     font-weight: 600;
     color: #000;
     line-height: 1.1;
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Heading ke niche ka gap kam kiya */
   }
 
   .banner-content-box p {
     font-size: 16px;
     color: #000;
     line-height: 1.5;
-    margin-bottom: 40px;
+    margin-bottom: 25px; /* Text aur button ke beech ka gap kam kiya (40px se 25px) */
   }
 
   /* Primary Shop Now button */
@@ -166,25 +166,26 @@
       display: none; 
     }
 
-    /* Banner adjustments for mobile */
+    /* Banner adjustments for mobile Figma match */
     .tisso-main-banner {
-      background-position: right center;
-      background-size: cover;
-      align-items: center; /* Mobile me vertically center */
-      padding: 60px 20px;
-      min-height: 480px;
+      background-position: bottom center; /* Image sabse niche jayegi */
+      background-size: 100% auto; /* Image poori dikhegi aur fit hogi */
+      align-items: flex-start; /* Text upar chala jayega */
+      padding: 50px 20px 280px 20px; /* Niche badi space chhodi taaki image dikhe */
+      min-height: auto;
     }
     
     .banner-content-box {
       max-width: 100%;
-      text-align: center; /* Mobile me text center me */
+      text-align: center; /* Sab kuch perfectly center me */
       margin: 0 auto; 
     }
     .banner-content-box h1 {
-      font-size: 42px;
+      font-size: 38px;
     }
     .banner-content-box p {
       font-size: 15px;
+      margin-bottom: 25px;
     }
   }
 {% endstyle %}
