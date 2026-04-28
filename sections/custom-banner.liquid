@@ -1,4 +1,9 @@
 {% style %}
+
+
+  /* --- Import Google Font: Instrument Sans (Figma font) --- */
+  @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap');
+
   /* --- Global Wrapper --- */
   .tisso-banner-wrapper {
     font-family: 'Instrument Sans', sans-serif;
@@ -7,193 +12,315 @@
     background-color: #ffffff;
   }
 
-  /* --- 1. Top Announcement Bar --- */
+  /* ============================================================
+     1. TOP ANNOUNCEMENT BAR
+     Layout: [Logo Left] [Center Message] [Yellow Button Right]
+     ============================================================ */
   .tisso-top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 40px;
-    background-color: #fafafa;
-    border-bottom: 1px solid #eaeaea;
+    padding: 10px 40px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
   }
 
+  /* Brand logo / name — bold, black, uppercase, left side */
   .top-bar-left {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
-    letter-spacing: 1px;
-    color: #000;
+    letter-spacing: 2px;
+    color: #000000;
     text-transform: uppercase;
     flex: 1;
+    white-space: nowrap;
   }
 
+  /* Center promotional message — normal weight, muted black */
   .top-bar-center {
     font-size: 13px;
-    color: #000;
+    font-weight: 400;
+    color: #111111;
     text-align: center;
     flex: 2;
+    padding: 0 20px;
   }
 
+  /* Right side: holds the yellow CTA button */
   .top-bar-right {
     flex: 1;
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
   }
 
+  /* Yellow "CHOOSE GIFT" button — flat, no border-radius, uppercase */
   .btn-choose-gift {
-    display: inline-block;
-    background-color: #fced4e; /* Exact Figma Yellow */
-    color: #000;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #fced4e; /* Figma yellow — exact match */
+    color: #000000;
     text-decoration: none;
-    padding: 10px 24px;
-    font-weight: 500;
+    padding: 10px 22px;
+    font-weight: 600;
     font-size: 12px;
     text-transform: uppercase;
-    transition: transform 0.3s ease;
+    letter-spacing: 1.5px;
+    border-radius: 0; /* Flat edges — matches Figma exactly */
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    white-space: nowrap;
   }
 
+  /* Arrow icon inside "Choose Gift" button */
+  .btn-choose-gift .arrow {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  /* Hover: slight scale effect on the button */
   .btn-choose-gift:hover {
-    transform: scale(1.05); /* Hover Animation */
+    background-color: #f5e200; /* Slightly deeper yellow on hover */
+    transform: scale(1.03);
   }
 
-  /* --- 2. Main Banner Layout --- */
+  /* ============================================================
+     2. MAIN BANNER — Full-Bleed Background Image
+     KEY FIX: In the Figma design, the sketch background image
+     covers the ENTIRE banner width (left + right), not just
+     the right half. The text content sits at BOTTOM-LEFT
+     on top of the image, NOT vertically centered.
+     ============================================================ */
   .tisso-main-banner {
     position: relative;
     width: 100%;
-    min-height: 550px;
-    display: flex;
-    align-items: center;
-    background-color: #ffffff;
-    /* Image right side me rahegi, text ke piche nahi jayegi */
+    min-height: 580px;
+
+    /* Full-bleed: image spans the complete banner including behind text */
     background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}');
-    background-size: cover; 
-    background-position: right center;
+    background-size: cover;
+    background-position: center center; /* Center the sketch items evenly */
     background-repeat: no-repeat;
-    padding: 60px 8%;
+    background-color: #ffffff; /* Fallback if no image is set */
+
+    /* Flex: align content to BOTTOM-LEFT (matches Figma) */
+    display: flex;
+    align-items: flex-end;    /* Push content to the bottom */
+    justify-content: flex-start; /* Keep content on the left */
+    padding: 50px 8% 55px 8%; /* Extra bottom padding so text clears the image edge */
   }
 
-  /* Text hamesha left side ki 450px jagah me hi rahega (Overlap Fix) */
+  /* Semi-transparent left fade so text is readable over the sketch image.
+     This mimics the Figma look where the left column reads clearly. */
+  .tisso-main-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* Gradient: white/opaque on the far left, fully transparent by ~45% width */
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.82) 0%,
+      rgba(255, 255, 255, 0.55) 30%,
+      rgba(255, 255, 255, 0.0) 50%
+    );
+    pointer-events: none; /* Clicks pass through to content */
+    z-index: 1;
+  }
+
+  /* Content box — sits above the gradient overlay via z-index */
   .banner-content-box {
-    max-width: 450px; 
+    position: relative;
     z-index: 2;
+    max-width: 480px;
   }
 
+  /* Large heading — heavy weight, black, tight line-height */
   .banner-content-box h1 {
-    font-size: 60px;
-    font-weight: 600;
-    color: #000;
-    line-height: 1.1;
-    margin-bottom: 20px;
+    font-size: 62px;
+    font-weight: 700;
+    color: #000000;
+    line-height: 1.0;
+    margin: 0 0 18px 0;
+    letter-spacing: -1px; /* Tight tracking like Figma */
   }
 
+  /* Subtext paragraph — regular weight, comfortable line-height */
   .banner-content-box p {
-    font-size: 16px;
-    color: #000;
-    line-height: 1.5;
-    margin-bottom: 40px;
+    font-size: 15px;
+    font-weight: 400;
+    color: #111111;
+    line-height: 1.6;
+    margin: 0 0 36px 0;
+    max-width: 380px; /* Keep lines short for readability */
   }
 
-  /* Shop Now Button */
+  /* "SHOP NOW" button — solid black, flat, uppercase with arrow */
   .btn-shop-now {
     display: inline-flex;
     align-items: center;
-    background-color: #000;
-    color: #fff;
+    gap: 12px;
+    background-color: #000000;
+    color: #ffffff;
     text-decoration: none;
-    padding: 16px 36px;
-    font-weight: 500;
-    font-size: 13px;
+    padding: 16px 32px;
+    font-weight: 600;
+    font-size: 12px;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
+    letter-spacing: 2px;
+    border-radius: 0; /* Flat — matches Figma */
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
 
-  .btn-shop-now span {
-    margin-left: 10px;
-    transition: transform 0.3s ease;
+  /* Arrow inside the "SHOP NOW" button */
+  .btn-shop-now .arrow {
+    display: inline-block;
+    font-size: 16px;
+    transition: transform 0.25s ease;
   }
 
-  /* Shop Now Hover Effect */
+  /* Hover: flip to yellow background, black text — arrow slides right */
   .btn-shop-now:hover {
-    background-color: #fced4e; /* Hover par yellow hoga */
-    color: #000;
+    background-color: #fced4e;
+    color: #000000;
   }
 
-  .btn-shop-now:hover span {
-    transform: translateX(5px); /* Arrow aage badhega */
+  .btn-shop-now:hover .arrow {
+    transform: translateX(6px); /* Arrow moves right on hover */
   }
 
-  /* --- 3. Bottom Text Bar --- */
+  /* ============================================================
+     3. BOTTOM INFO BAR
+     Centered, all-caps, small text — separator between sections
+     ============================================================ */
   .tisso-bottom-bar {
     text-align: center;
-    padding: 15px 20px;
-    background-color: #fff;
-    border-top: 1px solid #eaeaea;
-    border-bottom: 1px solid #eaeaea;
+    padding: 14px 20px;
+    background-color: #ffffff;
+    border-top: 1px solid #e5e5e5;
     font-size: 11px;
     font-weight: 600;
-    color: #333;
+    color: #222222;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
   }
 
-  /* --- Mobile Design Fixes --- */
+  /* ============================================================
+     4. MOBILE RESPONSIVE — Max 768px
+     ============================================================ */
   @media screen and (max-width: 768px) {
+
+    /* Stack top bar items vertically on mobile */
     .tisso-top-bar {
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       text-align: center;
-      padding: 15px;
+      padding: 14px 20px;
     }
-    .top-bar-left, .top-bar-center, .top-bar-right {
+
+    .top-bar-left,
+    .top-bar-right {
+      justify-content: center;
       text-align: center;
       flex: auto;
     }
+
+    /* On mobile: image anchors to bottom so sketch items show beneath text */
     .tisso-main-banner {
-      background-position: bottom center; /* Mobile me image niche jayegi */
+      background-position: bottom center;
       background-size: contain;
-      align-items: flex-start;
-      padding: 40px 20px;
-      min-height: 600px;
+      align-items: flex-start; /* Text goes back to the top on small screens */
+      padding: 40px 20px 200px 20px; /* Big bottom padding to leave room for image */
+      min-height: 640px;
     }
+
+    /* Remove the gradient on mobile — text is above the image, not over it */
+    .tisso-main-banner::before {
+      background: rgba(255, 255, 255, 0.7);
+    }
+
     .banner-content-box {
       max-width: 100%;
-      text-align: center;
+      text-align: left;
     }
+
     .banner-content-box h1 {
-      font-size: 45px;
+      font-size: 44px;
+    }
+
+    .banner-content-box p {
+      max-width: 100%;
     }
   }
+
 {% endstyle %}
 
+<!-- ============================================================
+     HTML STRUCTURE
+     ============================================================ -->
+
 <div class="tisso-banner-wrapper">
-  
+
+  <!-- ── TOP BAR ──────────────────────────────────────────── -->
+  <!-- Three columns: Brand name | Promo message | CTA button -->
   <div class="tisso-top-bar">
-    <div class="top-bar-left">{{ section.settings.top_left_text }}</div>
-    <div class="top-bar-center">{{ section.settings.top_center_text }}</div>
+
+    <!-- Left: Brand / Logo text -->
+    <div class="top-bar-left">
+      {{ section.settings.top_left_text }}
+    </div>
+
+    <!-- Center: Short promotional / announcement message -->
+    <div class="top-bar-center">
+      {{ section.settings.top_center_text }}
+    </div>
+
+    <!-- Right: Yellow "Choose Gift" CTA button with arrow -->
     <div class="top-bar-right">
       <a href="{{ section.settings.top_btn_link }}" class="btn-choose-gift">
-        {{ section.settings.top_btn_text }} &rarr;
+        {{ section.settings.top_btn_text }}
+        <span class="arrow">&rarr;</span>
       </a>
     </div>
-  </div>
 
+  </div>
+  <!-- ── END TOP BAR ───────────────────────────────────────── -->
+
+
+  <!-- ── MAIN BANNER ──────────────────────────────────────── -->
+  <!-- Full-bleed sketch background; text pinned to bottom-left -->
   <section class="tisso-main-banner">
+
+    <!-- Text content box: heading + subtext + CTA button -->
     <div class="banner-content-box">
+
+      <!-- Main heading -->
       <h1>{{ section.settings.heading }}</h1>
+
+      <!-- Subtext / description -->
       <p>{{ section.settings.subtext }}</p>
-      
+
+      <!-- "Shop Now" button — only renders if text is set in admin -->
       {% if section.settings.btn_text != blank %}
         <a href="{{ section.settings.btn_link }}" class="btn-shop-now">
-          {{ section.settings.btn_text }} <span>&rarr;</span>
+          {{ section.settings.btn_text }}
+          <span class="arrow">&rarr;</span>
         </a>
       {% endif %}
-    </div>
-  </section>
 
+    </div>
+
+  </section>
+  <!-- ── END MAIN BANNER ──────────────────────────────────── -->
+
+
+  <!-- ── BOTTOM INFO BAR ──────────────────────────────────── -->
+  <!-- Full-width centered small-caps info text -->
   <div class="tisso-bottom-bar">
     {{ section.settings.bottom_text }}
   </div>
+  <!-- ── END BOTTOM BAR ───────────────────────────────────── -->
 
 </div>
+
 
 {% schema %}
 {
@@ -206,25 +333,25 @@
     {
       "type": "text",
       "id": "top_left_text",
-      "label": "Top Left Text",
+      "label": "Brand Name (Top Left)",
       "default": "TISSO VISON"
     },
     {
       "type": "text",
       "id": "top_center_text",
-      "label": "Top Center Text",
+      "label": "Announcement Message (Top Center)",
       "default": "Find the ideal gift for your loved ones."
     },
     {
       "type": "text",
       "id": "top_btn_text",
-      "label": "Top Button Text",
+      "label": "CTA Button Text",
       "default": "CHOOSE GIFT"
     },
     {
       "type": "url",
       "id": "top_btn_link",
-      "label": "Top Button Link"
+      "label": "CTA Button Link"
     },
     {
       "type": "header",
@@ -233,30 +360,30 @@
     {
       "type": "image_picker",
       "id": "bg_image",
-      "label": "Background Sketch Image"
+      "label": "Full-Bleed Background Image (Sketch illustration)"
     },
     {
       "type": "text",
       "id": "heading",
-      "label": "Heading",
+      "label": "Main Heading",
       "default": "The Gift Guide"
     },
     {
       "type": "textarea",
       "id": "subtext",
-      "label": "Subtext",
+      "label": "Subtext / Description",
       "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season."
     },
     {
       "type": "text",
       "id": "btn_text",
-      "label": "Main Button Text",
+      "label": "Shop Now Button Text",
       "default": "SHOP NOW"
     },
     {
       "type": "url",
       "id": "btn_link",
-      "label": "Main Button Link"
+      "label": "Shop Now Button Link"
     },
     {
       "type": "header",
