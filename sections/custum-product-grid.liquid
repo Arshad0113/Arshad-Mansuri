@@ -1,11 +1,12 @@
 {% style %}
-  /* --- Section & Grid Layout --- */
+  /* Global section styling */
   .tisso-wild-section {
     padding: 60px 8%;
     background-color: #f4f4f4;
     font-family: 'Instrument Sans', sans-serif;
   }
 
+  /* Section heading */
   .wild-header {
     text-align: left;
     margin-bottom: 30px;
@@ -19,17 +20,19 @@
     font-family: serif;
   }
 
+  /* Product grid layout */
   .wild-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
   }
 
+  /* Product card */
   .wild-grid-item {
     position: relative;
     background-color: #fff;
     width: 100%;
-    padding-top: 100%; /* Creates a perfect square */
+    padding-top: 130%; 
     overflow: hidden;
   }
 
@@ -39,101 +42,128 @@
     object-fit: cover; z-index: 1;
   }
 
+  /* Plus button for quick view */
   .btn-open-modal {
-    position: absolute; bottom: 20px; right: 20px;
+    position: absolute; bottom: 15px; right: 15px;
     width: 35px; height: 35px; background-color: #fff; color: #000;
     border: none; border-radius: 50%; font-size: 20px; font-weight: 300;
     cursor: pointer; z-index: 2; display: flex; justify-content: center; align-items: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15); transition: transform 0.2s ease;
   }
   .btn-open-modal:hover { transform: scale(1.1); }
 
-  /* --- In-Place Quick View Modal (NO SCROLL DESIGN) --- */
+  /* Quick view modal overlay */
   .wild-quick-view {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background-color: #fff; z-index: 5; display: none;
     flex-direction: column; padding: 15px; box-sizing: border-box;
+    border: 1px solid #eaeaea;
   }
 
+  /* Modal close button */
   .btn-close-modal {
-    position: absolute; top: 10px; right: 10px; background: none; border: none;
+    position: absolute; top: 8px; right: 8px; background: none; border: none;
     font-size: 16px; cursor: pointer; color: #000; z-index: 6; padding: 5px;
   }
 
-  /* Top Area: Image + Info */
+  /* Modal top info area */
   .modal-top-row {
-    display: flex; gap: 12px; height: 35%; margin-bottom: 12px;
+    display: flex; gap: 12px; margin-bottom: 12px; height: 35%;
   }
 
   .modal-thumbnail {
-    width: 45%; height: 100%; object-fit: cover;
+    width: 40%; height: 100%; object-fit: cover;
   }
 
   .modal-info {
-    width: 55%; display: flex; flex-direction: column; justify-content: flex-start;
+    width: 60%; display: flex; flex-direction: column; justify-content: center;
   }
 
   .modal-title { font-size: 13px; font-weight: normal; color: #333; margin: 0 0 4px; }
-  .modal-price { font-size: 14px; font-weight: 600; color: #000; margin: 0 0 4px; }
+  .modal-price { font-size: 14px; font-weight: 600; color: #000; margin: 0 0 6px; }
   
+  /* Modal product description */
   .modal-desc {
     font-size: 10px; color: #666; line-height: 1.3; margin: 0;
-    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
   }
 
-  /* Form Elements */
+  /* Form layout */
   .modal-form {
     display: flex; flex-direction: column; flex: 1; justify-content: space-between;
   }
 
-  .option-label { font-size: 11px; margin-bottom: 5px; color: #333; }
+  .option-label { font-size: 11px; margin-bottom: 4px; color: #333; }
 
-  /* Color Buttons (Clickable Fix) */
+  /* Color selection boxes */
   .color-boxes {
-    display: flex; border: 1px solid #ccc; height: 32px;
+    display: flex; border: 1px solid #000; height: 32px; width: 100%;
   }
 
   .color-box {
     flex: 1; display: flex; align-items: center; justify-content: center;
-    font-size: 12px; cursor: pointer; background: #fff; color: #000; transition: 0.2s;
+    font-size: 11px; cursor: pointer; background: #fff; color: #000; transition: 0.2s;
   }
 
-  .color-box:first-child { border-right: 1px solid #ccc; }
-  
-  /* Active Class for selected color (Figma match) */
+  .color-box:first-child { border-right: 1px solid #000; }
   .color-box.active { background: #000; color: #fff; font-weight: 600; }
 
-  /* Size Dropdown (Figma Match) */
+  /* Size selection dropdown */
   .size-select-wrapper {
-    position: relative; height: 35px; border: 1px solid #ccc; background: #fff;
+    position: relative; height: 34px; border: 1px solid #000; background: #fff;
   }
 
   .size-select {
-    width: 100%; height: 100%; padding: 0 10px; font-size: 12px; border: none;
+    width: 100%; height: 100%; padding: 0 10px; font-size: 11px; border: none;
     background: transparent; appearance: none; outline: none; cursor: pointer; color: #000;
   }
 
   .select-chevron {
-    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-    font-size: 12px; pointer-events: none; color: #000;
+    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+    pointer-events: none; display: flex; align-items: center;
   }
 
-  /* Cart Button */
+  /* Modal add to cart button */
   .btn-modal-cart {
-    width: 100%; height: 42px; background: #000; color: #fff; border: none;
+    width: 100%; height: 40px; background: #000; color: #fff; border: none;
     font-size: 11px; font-weight: 600; cursor: pointer; display: flex; 
     align-items: center; justify-content: center; letter-spacing: 0.5px;
-    text-transform: uppercase; transition: 0.3s;
+    text-transform: uppercase; transition: 0.3s; margin-top: auto;
   }
   .btn-modal-cart:hover { background: #333; }
 
-  /* Responsive Adjustments */
+  /* Mobile responsiveness */
   @media screen and (max-width: 768px) {
-    .wild-grid { grid-template-columns: repeat(2, 1fr); }
-    .tisso-wild-section { padding: 40px 20px; }
-  }
-  @media screen and (max-width: 480px) {
-    .wild-grid { grid-template-columns: 1fr; }
+    .wild-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .tisso-wild-section { padding: 40px 15px; }
+    
+    /* Taller card to fit modal content */
+    .wild-grid-item { padding-top: 165%; } 
+
+    /* Compact modal for mobile */
+    .wild-quick-view { padding: 10px; }
+    .modal-top-row { gap: 8px; margin-bottom: 8px; height: auto; }
+    .modal-thumbnail { width: 40%; aspect-ratio: 3/4; height: auto; }
+    .modal-info { justify-content: flex-start; }
+    
+    .modal-title { font-size: 11px; margin-bottom: 2px; }
+    .modal-price { font-size: 12px; margin-bottom: 4px; }
+    
+    /* Show description on mobile */
+    .modal-desc { 
+      display: -webkit-box; 
+      font-size: 9px; 
+      line-height: 1.2; 
+      -webkit-line-clamp: 4; 
+      margin-bottom: 0; 
+    }
+    
+    .option-label { font-size: 10px; margin-bottom: 3px; }
+    .color-boxes { height: 26px; }
+    .color-box { font-size: 10px; }
+    .size-select-wrapper { height: 28px; }
+    .size-select { font-size: 10px; }
+    .btn-modal-cart { height: 32px; font-size: 10px; margin-top: 8px; }
   }
 {% endstyle %}
 
@@ -149,7 +179,7 @@
       {% for product in selected_collection.products limit: 6 %}
         
         <div class="wild-grid-item">
-          <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" width="600" height="600" loading="lazy">
+          <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" width="600" height="800" loading="lazy">
           
           <button class="btn-open-modal" onclick="openModal('modal-{{ product.id }}')">+</button>
 
@@ -161,7 +191,7 @@
               <div class="modal-info">
                 <h3 class="modal-title">{{ product.title }}</h3>
                 <p class="modal-price">{{ product.price | money }}</p>
-                <div class="modal-desc">{{ product.description | strip_html | truncatewords: 12 }}</div>
+                <div class="modal-desc">{{ product.description | strip_html | truncatewords: 10 }}</div>
               </div>
             </div>
 
@@ -171,8 +201,15 @@
               <div>
                 <div class="option-label">Color</div>
                 <div class="color-boxes" id="color-box-{{ product.id }}">
-                  <div class="color-box active" onclick="selectColor(this, '{{ product.id }}')">White</div>
-                  <div class="color-box" onclick="selectColor(this, '{{ product.id }}')">Black</div>
+                  {% assign color_option = product.options_by_name['Color'] %}
+                  {% if color_option %}
+                    {% for value in color_option.values limit: 2 %}
+                      <div class="color-box {% if forloop.first %}active{% endif %}" onclick="selectColor(this, '{{ product.id }}')">{{ value }}</div>
+                    {% endfor %}
+                  {% else %}
+                    <div class="color-box active" onclick="selectColor(this, '{{ product.id }}')">White</div>
+                    <div class="color-box" onclick="selectColor(this, '{{ product.id }}')">Black</div>
+                  {% endif %}
                 </div>
               </div>
 
@@ -187,7 +224,12 @@
                     <option>L</option>
                     <option>XL</option>
                   </select>
-                  <span class="select-chevron">&#8964;</span> </div>
+                  <span class="select-chevron">
+                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 1L5 5L9 1" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                </div>
               </div>
 
               <button type="submit" class="btn-modal-cart">
@@ -206,6 +248,7 @@
 </div>
 
 <script>
+  // Toggle modal visibility
   function openModal(modalId) {
     document.getElementById(modalId).style.display = 'flex';
   }
@@ -214,16 +257,11 @@
     document.getElementById(modalId).style.display = 'none';
   }
 
-  // Color Box Click Logic
+  // Handle color box selection
   function selectColor(element, productId) {
-    // 1. Us product ke dono boxes dhoondho
     let container = document.getElementById('color-box-' + productId);
     let boxes = container.querySelectorAll('.color-box');
-    
-    // 2. Sabme se 'active' class hata do (safed kar do)
     boxes.forEach(box => box.classList.remove('active'));
-    
-    // 3. Jis par click hua hai, us par 'active' class laga do (kaala kar do)
     element.classList.add('active');
   }
 </script>
