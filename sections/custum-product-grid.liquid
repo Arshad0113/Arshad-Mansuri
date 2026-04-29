@@ -1,72 +1,56 @@
 {% style %}
   /* --- Section & Grid Layout --- */
-  .tisso-wild-section { padding: 60px 8%; background-color: #f4f4f4; font-family: 'Instrument Sans', sans-serif; }
+  .tisso-wild-section { padding: 60px 5%; background-color: #f4f4f4; font-family: 'Instrument Sans', sans-serif; }
+  
+  /* NEW: Container add kiya hai taaki large screen par design na faile (Figma match) */
+  .wild-container { max-width: 1200px; margin: 0 auto; }
+  
   .wild-header h2 { font-size: 32px; font-weight: 400; color: #121212; margin: 0 0 30px 0; font-family: serif; }
-  .wild-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+  .wild-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
   
-  /* --- Product Image Card (FIXED: No Border, Edge-to-Edge Cover) --- */
-  .wild-grid-item { position: relative; background-color: #fff; width: 100%; padding-top: 115%; overflow: hidden; border: none; border-radius: 4px; }
+  /* --- Product Image Card --- */
+  /* FIXED: padding-top: 100% makes it a perfect Square like Figma */
+  .wild-grid-item { position: relative; background-color: #fff; width: 100%; padding-top: 100%; overflow: hidden; border: none; }
   
-  /* 'object-fit: cover' aur 'padding: 0' se image poora box fill karegi bina white border ke */
+  /* Image fills the square perfectly without any white borders */
   .wild-grid-item > img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; padding: 0; z-index: 1; transition: transform 0.3s ease; }
-  .wild-grid-item:hover > img { transform: scale(1.03); } /* Halka sa zoom effect hover par */
+  .wild-grid-item:hover > img { transform: scale(1.03); }
   
   /* --- Plus Button --- */
   .btn-open-modal { position: absolute; bottom: 15px; right: 15px; width: 35px; height: 35px; background-color: #fff; color: #000; border: none; border-radius: 50%; font-size: 20px; cursor: pointer; z-index: 2; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.2s; }
   .btn-open-modal:hover { transform: scale(1.1); }
   
   /* --- Quick View Modal Overlay --- */
-  .wild-quick-view { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #fff; z-index: 5; display: none; flex-direction: column; padding: 15px; box-sizing: border-box; border: 1px solid #eaeaea; overflow-y: auto; }
+  .wild-quick-view { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #fff; z-index: 5; display: none; flex-direction: column; padding: 15px; box-sizing: border-box; overflow-y: auto; }
   .btn-close-modal { position: absolute; top: 5px; right: 8px; background: none; border: none; font-size: 16px; cursor: pointer; z-index: 6; }
   
   /* --- Modal Info Area --- */
   .modal-top-row { display: flex; gap: 12px; margin-bottom: 12px; height: auto; }
-  .modal-thumbnail { width: 35%; aspect-ratio: 3/4; object-fit: cover; }
-  .modal-info { width: 65%; display: flex; flex-direction: column; justify-content: flex-start; }
+  .modal-thumbnail { width: 30%; aspect-ratio: 3/4; object-fit: cover; }
+  .modal-info { width: 70%; display: flex; flex-direction: column; justify-content: flex-start; }
   .modal-title { font-size: 13px; font-weight: normal; color: #333; margin: 0 0 4px; }
   .modal-price { font-size: 14px; font-weight: 600; color: #000; margin: 0 0 6px; }
-  .modal-desc { font-size: 10px; color: #666; line-height: 1.3; margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .modal-desc { font-size: 10px; color: #666; line-height: 1.3; margin: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   
-  /* --- Form and Product Input Style (Custom) --- */
+  /* --- Form and Product Input Style --- */
   .modal-form { display: flex; flex-direction: column; flex: 1; justify-content: space-between; gap: 8px; }
   .option-label { font-size: 11px; margin-bottom: 4px; color: #111; font-weight: 500; }
   
-  /* --- Colors Swatches: Figma Match with Solid Vertical Strip --- */
+  /* --- Colors Swatches --- */
   .color-boxes { display: flex; border: 1px solid #111; height: 34px; width: 100%; }
-  .color-box { 
-    flex: 1; display: flex; align-items: center; justify-content: center; 
-    font-size: 11px; cursor: pointer; background: #fff; color: #111; 
-    border-right: 1px solid #111; text-transform: capitalize; position: relative;
-    padding-left: 10px; 
-    transition: all 0.2s ease; 
-  }
+  .color-box { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 11px; cursor: pointer; background: #fff; color: #111; border-right: 1px solid #111; text-transform: capitalize; position: relative; padding-left: 10px; transition: all 0.2s ease; }
   .color-box:last-child { border-right: none; }
+  .color-box::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 8px; background-color: var(--swatch-color); }
+  .color-box.active { font-weight: 700; background-color: #000; color: #fff; }
   
-  .color-box::before {
-    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 8px; 
-    background-color: var(--swatch-color);
-  }
-
-  .color-box.active {
-    font-weight: 700; background-color: #000; color: #fff; 
-  }
-  
-  /* --- Size Select: Figma-Style custom dropdown --- */
+  /* --- Size Select --- */
   .custom-select-container { position: relative; width: 100%; height: 34px; user-select: none; }
-  .custom-select-trigger {
-    display: flex; justify-content: space-between; align-items: center; width: 100%; height: 100%;
-    padding: 0 10px; font-size: 11px; border: 1px solid #111; background: #fff; cursor: pointer; color: #111;
-  }
-  .custom-select-options {
-    position: absolute; top: 100%; left: -1px; right: -1px; background: #fff;
-    border: 1px solid #111; border-top: none; z-index: 10; display: none;
-    max-height: 120px; overflow-y: auto; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-  }
+  .custom-select-trigger { display: flex; justify-content: space-between; align-items: center; width: 100%; height: 100%; padding: 0 10px; font-size: 11px; border: 1px solid #111; background: #fff; cursor: pointer; color: #111; }
+  .custom-select-options { position: absolute; top: 100%; left: -1px; right: -1px; background: #fff; border: 1px solid #111; border-top: none; z-index: 10; display: none; max-height: 120px; overflow-y: auto; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
   .custom-select-options.open { display: block; }
   .custom-option { padding: 8px 10px; font-size: 11px; cursor: pointer; text-align: center; color: #111; border-bottom: 1px solid #eaeaea; }
   .custom-option:last-child { border-bottom: none; }
   .custom-option:hover { background: #f4f4f4; }
-  
   .select-chevron { display: flex; align-items: center; transition: transform 0.3s ease; }
   .custom-select-options.open ~ .custom-select-trigger .select-chevron { transform: rotate(180deg); }
 
@@ -79,125 +63,124 @@
     .wild-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .tisso-wild-section { padding: 40px 15px; }
     
-    /* Keep popup spacious */
-    .wild-grid-item { padding-top: 150%; } 
+    /* Mobile ke liye height thodi zyada rakhi hai taaki button na kate */
+    .wild-grid-item { padding-top: 140%; } 
     .wild-quick-view { padding: 10px; }
     
-    /* Hide description on mobile to make room for size and cart button */
+    /* Description hide for mobile */
     .modal-desc { display: none; } 
     
     .modal-title { font-size: 11px; }
     .modal-price { font-size: 12px; }
-    
     .color-boxes, .custom-select-container { height: 30px; }
     .color-box { font-size: 10px; padding-left: 8px; }
     .color-box::before { width: 6px; } 
     .custom-select-trigger, .custom-option { font-size: 10px; }
-    
     .btn-modal-cart { height: 36px; font-size: 10px; margin-top: 10px; }
   }
 {% endstyle %}
 
 <div class="tisso-wild-section">
-  <div class="wild-header">
-    <h2>{{ section.settings.heading }}</h2>
-  </div>
+  <div class="wild-container">
+    <div class="wild-header">
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
 
-  <div class="wild-grid">
-    {% assign selected_collection = section.settings.collection %}
-    
-    <input type="hidden" id="bonus-jacket-id" value="{{ section.settings.bonus_product.variants.first.id }}">
-    
-    {% if selected_collection != blank %}
-      {% for product in selected_collection.products limit: 6 %}
-        
-        <div class="wild-grid-item">
-          <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" width="600" height="800" loading="lazy">
+    <div class="wild-grid">
+      {% assign selected_collection = section.settings.collection %}
+      
+      <input type="hidden" id="bonus-jacket-id" value="{{ section.settings.bonus_product.variants.first.id }}">
+      
+      {% if selected_collection != blank %}
+        {% for product in selected_collection.products limit: 6 %}
           
-          <button class="btn-open-modal" onclick="openModal('modal-{{ product.id }}')">+</button>
-
-          <div class="wild-quick-view" id="modal-{{ product.id }}">
-            <button class="btn-close-modal" type="button" onclick="closeModal('modal-{{ product.id }}')">&#10005;</button>
+          <div class="wild-grid-item">
+            <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" width="600" height="800" loading="lazy">
             
-            <div class="modal-top-row">
-              <img src="{{ product.featured_image | image_url: width: 150 }}" alt="{{ product.title | escape }}" class="modal-thumbnail" width="150" height="200" loading="lazy">
-              <div class="modal-info">
-                <h3 class="modal-title">{{ product.title }}</h3>
-                <p class="modal-price">{{ product.price | money }}</p>
-                <div class="modal-desc">{{ product.description | strip_html | truncatewords: 10 }}</div>
-              </div>
-            </div>
+            <button class="btn-open-modal" onclick="openModal('modal-{{ product.id }}')">+</button>
 
-            <form id="form-{{ product.id }}" onsubmit="handleAjaxCart(event, '{{ product.id }}')" class="modal-form">
-              <script type="application/json" id="variants-{{ product.id }}">
-                {{ product.variants | json }}
-              </script>
+            <div class="wild-quick-view" id="modal-{{ product.id }}">
+              <button class="btn-close-modal" type="button" onclick="closeModal('modal-{{ product.id }}')">&#10005;</button>
               
-              <input type="hidden" name="id" id="selected-variant-{{ product.id }}" value="{{ product.variants.first.id }}" />
-
-              <div>
-                <div class="option-label">Color</div>
-                <div class="color-boxes" id="color-box-{{ product.id }}">
-                  {% assign color_opt = product.options_by_name['Color'] %}
-                  {% if color_opt %}
-                    {% for value in color_opt.values limit: 2 %}
-                      {% assign swatch_hex = value | downcase | replace: ' ', '' %}
-                      {% if swatch_hex == 'white' %}{% assign swatch_hex = '#f0f0f0' %}{% endif %}
-                      {% if swatch_hex == 'black' %}{% assign swatch_hex = '#000000' %}{% endif %}
-                      {% if swatch_hex == 'grey' %}{% assign swatch_hex = '#808080' %}{% endif %}
-                      {% if swatch_hex == 'blue' %}{% assign swatch_hex = '#0000ff' %}{% endif %}
-                      {% if swatch_hex == 'red' %}{% assign swatch_hex = '#ff0000' %}{% endif %}
-                      
-                      <div class="color-box {% if forloop.first %}active{% endif %}" data-val="{{ value | escape }}" style="--swatch-color: {{ swatch_hex }};" onclick="selectColor(this, '{{ product.id }}')">
-                        {{ value }}
-                      </div>
-                    {% endfor %}
-                  {% else %}
-                    <div class="color-box active" data-val="White" style="--swatch-color: #f0f0f0;" onclick="selectColor(this, '{{ product.id }}')">White</div>
-                    <div class="color-box" data-val="Black" style="--swatch-color: #000000;" onclick="selectColor(this, '{{ product.id }}')">Black</div>
-                  {% endif %}
+              <div class="modal-top-row">
+                <img src="{{ product.featured_image | image_url: width: 150 }}" alt="{{ product.title | escape }}" class="modal-thumbnail" width="150" height="200" loading="lazy">
+                <div class="modal-info">
+                  <h3 class="modal-title">{{ product.title }}</h3>
+                  <p class="modal-price">{{ product.price | money }}</p>
+                  <div class="modal-desc">{{ product.description | strip_html | truncatewords: 8 }}</div>
                 </div>
               </div>
 
-              <div>
-                <div class="option-label">Size</div>
-                <div class="custom-select-container" id="size-container-{{ product.id }}">
-                  <div class="custom-select-trigger" onclick="toggleDropdown('{{ product.id }}')">
-                    <span id="size-display-{{ product.id }}">Choose your size</span>
-                    <span class="select-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#000" stroke-width="1.2"/></svg></span>
-                  </div>
-                  
-                  <div class="custom-select-options" id="size-options-{{ product.id }}">
-                    {% assign size_opt = product.options_by_name['Size'] %}
-                    {% if size_opt and size_opt.values.size > 0 %}
-                      {% for value in size_opt.values %}
-                        <div class="custom-option" onclick="selectSize('{{ value | escape }}', '{{ product.id }}')">{{ value }}</div>
+              <form id="form-{{ product.id }}" onsubmit="handleAjaxCart(event, '{{ product.id }}')" class="modal-form">
+                <script type="application/json" id="variants-{{ product.id }}">
+                  {{ product.variants | json }}
+                </script>
+                
+                <input type="hidden" name="id" id="selected-variant-{{ product.id }}" value="{{ product.variants.first.id }}" />
+
+                <div>
+                  <div class="option-label">Color</div>
+                  <div class="color-boxes" id="color-box-{{ product.id }}">
+                    {% assign color_opt = product.options_by_name['Color'] %}
+                    {% if color_opt %}
+                      {% for value in color_opt.values limit: 2 %}
+                        {% assign swatch_hex = value | downcase | replace: ' ', '' %}
+                        {% if swatch_hex == 'white' %}{% assign swatch_hex = '#f0f0f0' %}{% endif %}
+                        {% if swatch_hex == 'black' %}{% assign swatch_hex = '#000000' %}{% endif %}
+                        {% if swatch_hex == 'grey' %}{% assign swatch_hex = '#808080' %}{% endif %}
+                        {% if swatch_hex == 'blue' %}{% assign swatch_hex = '#0000ff' %}{% endif %}
+                        {% if swatch_hex == 'red' %}{% assign swatch_hex = '#ff0000' %}{% endif %}
+                        
+                        <div class="color-box {% if forloop.first %}active{% endif %}" data-val="{{ value | escape }}" style="--swatch-color: {{ swatch_hex }};" onclick="selectColor(this, '{{ product.id }}')">
+                          {{ value }}
+                        </div>
                       {% endfor %}
                     {% else %}
-                      <div class="custom-option" onclick="selectSize('XS', '{{ product.id }}')">XS</div>
-                      <div class="custom-option" onclick="selectSize('S', '{{ product.id }}')">S</div>
-                      <div class="custom-option" onclick="selectSize('M', '{{ product.id }}')">M</div>
-                      <div class="custom-option" onclick="selectSize('L', '{{ product.id }}')">L</div>
-                      <div class="custom-option" onclick="selectSize('XL', '{{ product.id }}')">XL</div>
+                      <div class="color-box active" data-val="White" style="--swatch-color: #f0f0f0;" onclick="selectColor(this, '{{ product.id }}')">White</div>
+                      <div class="color-box" data-val="Black" style="--swatch-color: #000000;" onclick="selectColor(this, '{{ product.id }}')">Black</div>
                     {% endif %}
                   </div>
                 </div>
-                <input type="hidden" id="size-{{ product.id }}" value="">
-              </div>
 
-              <button type="submit" class="btn-modal-cart" id="btn-{{ product.id }}">
-                ADD TO CART <span style="margin-left: 8px;">&rarr;</span>
-              </button>
-            </form>
+                <div>
+                  <div class="option-label">Size</div>
+                  <div class="custom-select-container" id="size-container-{{ product.id }}">
+                    <div class="custom-select-trigger" onclick="toggleDropdown('{{ product.id }}')">
+                      <span id="size-display-{{ product.id }}">Choose your size</span>
+                      <span class="select-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#000" stroke-width="1.2"/></svg></span>
+                    </div>
+                    
+                    <div class="custom-select-options" id="size-options-{{ product.id }}">
+                      {% assign size_opt = product.options_by_name['Size'] %}
+                      {% if size_opt and size_opt.values.size > 0 %}
+                        {% for value in size_opt.values %}
+                          <div class="custom-option" onclick="selectSize('{{ value | escape }}', '{{ product.id }}')">{{ value }}</div>
+                        {% endfor %}
+                      {% else %}
+                        <div class="custom-option" onclick="selectSize('XS', '{{ product.id }}')">XS</div>
+                        <div class="custom-option" onclick="selectSize('S', '{{ product.id }}')">S</div>
+                        <div class="custom-option" onclick="selectSize('M', '{{ product.id }}')">M</div>
+                        <div class="custom-option" onclick="selectSize('L', '{{ product.id }}')">L</div>
+                        <div class="custom-option" onclick="selectSize('XL', '{{ product.id }}')">XL</div>
+                      {% endif %}
+                    </div>
+                  </div>
+                  <input type="hidden" id="size-{{ product.id }}" value="">
+                </div>
+
+                <button type="submit" class="btn-modal-cart" id="btn-{{ product.id }}">
+                  ADD TO CART <span style="margin-left: 8px;">&rarr;</span>
+                </button>
+              </form>
+            </div>
           </div>
-        </div>
 
-      {% endfor %}
-    {% else %}
-      <p>Please select a collection in the theme customizer.</p>
-    {% endif %}
-  </div>
-</div>
+        {% endfor %}
+      {% else %}
+        <p>Please select a collection in the theme customizer.</p>
+      {% endif %}
+    </div>
+  </div> </div>
 
 <script>
   function openModal(id) { document.getElementById(id).style.display = 'flex'; }
