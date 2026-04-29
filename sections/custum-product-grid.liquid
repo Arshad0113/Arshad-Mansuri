@@ -1,16 +1,22 @@
 {% style %}
+  /* Section & Grid Layout */
   .tisso-wild-section { padding: 60px 8%; background-color: #f4f4f4; font-family: 'Instrument Sans', sans-serif; }
   .wild-header h2 { font-size: 32px; font-weight: 400; color: #121212; margin: 0 0 30px 0; font-family: serif; }
   .wild-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+  
+  /* Product Image Card */
   .wild-grid-item { position: relative; background-color: #fff; width: 100%; padding-top: 130%; overflow: hidden; }
   .wild-grid-item > img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
   
-  .btn-open-modal { position: absolute; bottom: 15px; right: 15px; width: 35px; height: 35px; background-color: #fff; color: #000; border: none; border-radius: 50%; font-size: 20px; cursor: pointer; z-index: 2; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+  /* Plus Button */
+  .btn-open-modal { position: absolute; bottom: 15px; right: 15px; width: 35px; height: 35px; background-color: #fff; color: #000; border: none; border-radius: 50%; font-size: 20px; cursor: pointer; z-index: 2; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.2s; }
   .btn-open-modal:hover { transform: scale(1.1); }
   
+  /* Quick View Modal Overlay */
   .wild-quick-view { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #fff; z-index: 5; display: none; flex-direction: column; padding: 15px; box-sizing: border-box; border: 1px solid #eaeaea; }
   .btn-close-modal { position: absolute; top: 5px; right: 8px; background: none; border: none; font-size: 16px; cursor: pointer; z-index: 6; }
   
+  /* Modal Info */
   .modal-top-row { display: flex; gap: 12px; margin-bottom: 12px; height: auto; }
   .modal-thumbnail { width: 35%; aspect-ratio: 3/4; object-fit: cover; }
   .modal-info { width: 65%; display: flex; flex-direction: column; justify-content: flex-start; }
@@ -18,28 +24,62 @@
   .modal-price { font-size: 14px; font-weight: 600; color: #000; margin: 0 0 6px; }
   .modal-desc { font-size: 10px; color: #666; line-height: 1.3; margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   
+  /* Form Base */
   .modal-form { display: flex; flex-direction: column; flex: 1; justify-content: space-between; gap: 8px; }
   .option-label { font-size: 11px; margin-bottom: 4px; color: #111; font-weight: 500; }
+  
+  /* Custom Color Swatches (Figma Match) */
   .color-boxes { display: flex; border: 1px solid #111; height: 34px; width: 100%; }
-  .color-box { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; cursor: pointer; background: #fff; color: #111; border-right: 1px solid #111; text-transform: capitalize; }
+  .color-box { 
+    flex: 1; display: flex; align-items: center; justify-content: center; 
+    font-size: 11px; cursor: pointer; background: #fff; color: #111; 
+    border-right: 1px solid #111; text-transform: capitalize;
+  }
   .color-box:last-child { border-right: none; }
-  .color-box.active { background: #111; color: #fff; font-weight: 600; }
   
-  .size-select-wrapper { position: relative; height: 34px; border: 1px solid #111; }
-  .size-select { width: 100%; height: 100%; padding: 0 10px; font-size: 11px; border: none; appearance: none; outline: none; cursor: pointer; background: transparent; }
-  .select-chevron { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+  /* Little colored circle inside the box */
+  .color-circle { 
+    width: 10px; height: 10px; border-radius: 50%; 
+    background-color: var(--swatch-color); margin-right: 6px; border: 1px solid #ccc;
+  }
+  .color-box.active { font-weight: 700; background-color: #f9f9f9; }
   
+  /* Custom Size Dropdown (Figma Exact Match) */
+  .custom-select-container { position: relative; width: 100%; height: 34px; user-select: none; }
+  .custom-select-trigger {
+    display: flex; justify-content: space-between; align-items: center; width: 100%; height: 100%;
+    padding: 0 10px; font-size: 11px; border: 1px solid #111; background: #fff; cursor: pointer; color: #111;
+  }
+  .custom-select-options {
+    position: absolute; top: 100%; left: -1px; right: -1px; background: #fff;
+    border: 1px solid #111; border-top: none; z-index: 10; display: none;
+    max-height: 120px; overflow-y: auto; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  }
+  .custom-select-options.open { display: block; }
+  .custom-option { padding: 8px 10px; font-size: 11px; cursor: pointer; text-align: center; color: #111; border-bottom: 1px solid #eaeaea; }
+  .custom-option:last-child { border-bottom: none; }
+  .custom-option:hover { background: #f4f4f4; }
+  
+  /* Chevron Animation */
+  .select-chevron { display: flex; align-items: center; transition: transform 0.3s ease; }
+  .custom-select-options.open ~ .custom-select-trigger .select-chevron { transform: rotate(180deg); }
+
+  /* Add to Cart Button */
   .btn-modal-cart { width: 100%; height: 42px; background: #111; color: #fff; border: none; font-size: 11px; font-weight: 600; cursor: pointer; text-transform: uppercase; display: flex; align-items: center; justify-content: center; margin-top: auto; transition: opacity 0.3s;}
   .btn-modal-cart:hover { opacity: 0.8; }
 
+  /* Mobile Adjustments */
   @media screen and (max-width: 768px) {
     .wild-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .tisso-wild-section { padding: 40px 15px; }
     .wild-grid-item { padding-top: 165%; } 
     .wild-quick-view { padding: 12px; }
     .modal-desc { font-size: 9px; -webkit-line-clamp: 4; }
-    .color-boxes, .size-select-wrapper { height: 30px; }
+    .color-boxes, .custom-select-container { height: 30px; }
+    .color-box { font-size: 10px; }
+    .color-circle { width: 8px; height: 8px; margin-right: 4px; }
     .btn-modal-cart { height: 36px; font-size: 10px; }
+    .custom-select-trigger, .custom-option { font-size: 10px; }
   }
 {% endstyle %}
 
@@ -73,10 +113,7 @@
             </div>
 
             <form id="form-{{ product.id }}" onsubmit="handleAjaxCart(event, '{{ product.id }}')" class="modal-form">
-              <script type="application/json" id="variants-{{ product.id }}">
-                {{ product.variants | json }}
-              </script>
-              
+              <script type="application/json" id="variants-{{ product.id }}">{{ product.variants | json }}</script>
               <input type="hidden" name="id" id="selected-variant-{{ product.id }}" value="{{ product.variants.first.id }}" />
 
               <div>
@@ -85,38 +122,53 @@
                   {% assign color_opt = product.options_by_name['Color'] %}
                   {% if color_opt %}
                     {% for value in color_opt.values limit: 2 %}
-                      <div class="color-box {% if forloop.first %}active{% endif %}" data-val="{{ value | escape }}" onclick="selectColor(this, '{{ product.id }}')">{{ value }}</div>
+                      {% assign swatch_hex = value | downcase | replace: ' ', '' %}
+                      {% if swatch_hex == 'white' %}{% assign swatch_hex = '#ffffff' %}{% endif %}
+                      {% if swatch_hex == 'black' %}{% assign swatch_hex = '#000000' %}{% endif %}
+                      {% if swatch_hex == 'grey' %}{% assign swatch_hex = '#808080' %}{% endif %}
+                      {% if swatch_hex == 'blue' %}{% assign swatch_hex = '#0000ff' %}{% endif %}
+                      {% if swatch_hex == 'red' %}{% assign swatch_hex = '#ff0000' %}{% endif %}
+                      
+                      <div class="color-box {% if forloop.first %}active{% endif %}" data-val="{{ value | escape }}" onclick="selectColor(this, '{{ product.id }}')">
+                        <span class="color-circle" style="--swatch-color: {{ swatch_hex }};"></span>
+                        {{ value }}
+                      </div>
                     {% endfor %}
                   {% else %}
-                    <div class="color-box active" data-val="White" onclick="selectColor(this, '{{ product.id }}')">White</div>
-                    <div class="color-box" data-val="Black" onclick="selectColor(this, '{{ product.id }}')">Black</div>
+                    <div class="color-box active" data-val="White" onclick="selectColor(this, '{{ product.id }}')">
+                      <span class="color-circle" style="--swatch-color: #ffffff;"></span> White
+                    </div>
+                    <div class="color-box" data-val="Black" onclick="selectColor(this, '{{ product.id }}')">
+                      <span class="color-circle" style="--swatch-color: #000000;"></span> Black
+                    </div>
                   {% endif %}
                 </div>
               </div>
 
               <div>
                 <div class="option-label">Size</div>
-                <div class="size-select-wrapper">
-                  <select class="size-select" id="size-{{ product.id }}" onchange="updateVariant('{{ product.id }}')">
-                    <option value="" disabled selected>Choose your size</option>
+                <div class="custom-select-container" id="size-container-{{ product.id }}">
+                  <div class="custom-select-trigger" onclick="toggleDropdown('{{ product.id }}')">
+                    <span id="size-display-{{ product.id }}">Choose your size</span>
+                    <span class="select-chevron"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#000" stroke-width="1.2"/></svg></span>
+                  </div>
+                  
+                  <div class="custom-select-options" id="size-options-{{ product.id }}">
                     {% assign size_opt = product.options_by_name['Size'] %}
                     {% if size_opt and size_opt.values.size > 0 %}
                       {% for value in size_opt.values %}
-                        <option value="{{ value | escape }}">{{ value }}</option>
+                        <div class="custom-option" onclick="selectSize('{{ value | escape }}', '{{ product.id }}')">{{ value }}</div>
                       {% endfor %}
                     {% else %}
-                      <option value="XS">XS</option>
-                      <option value="S">S</option>
-                      <option value="M">M</option>
-                      <option value="L">L</option>
-                      <option value="XL">XL</option>
-                      <option value="XXL">XXL</option>
+                      <div class="custom-option" onclick="selectSize('XS', '{{ product.id }}')">XS</div>
+                      <div class="custom-option" onclick="selectSize('S', '{{ product.id }}')">S</div>
+                      <div class="custom-option" onclick="selectSize('M', '{{ product.id }}')">M</div>
+                      <div class="custom-option" onclick="selectSize('L', '{{ product.id }}')">L</div>
+                      <div class="custom-option" onclick="selectSize('XL', '{{ product.id }}')">XL</div>
                     {% endif %}
-                  </select>
-                  <span class="select-chevron">
-                    <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#000" stroke-width="1.2"/></svg>
-                  </span>
+                  </div>
                 </div>
+                <input type="hidden" id="size-{{ product.id }}" value="">
               </div>
 
               <button type="submit" class="btn-modal-cart" id="btn-{{ product.id }}">
@@ -135,13 +187,37 @@
   function openModal(id) { document.getElementById(id).style.display = 'flex'; }
   function closeModal(id) { document.getElementById(id).style.display = 'none'; }
   
+  // Color Selection Logic
   function selectColor(el, pid) {
     let container = document.getElementById('color-box-' + pid);
     container.querySelectorAll('.color-box').forEach(b => b.classList.remove('active'));
     el.classList.add('active');
-    updateVariant(pid); // Update hidden ID when color changes
+    updateVariant(pid);
   }
 
+  // Custom Dropdown UI Logic
+  function toggleDropdown(pid) {
+    document.querySelectorAll('.custom-select-options').forEach(el => {
+      if(el.id !== 'size-options-' + pid) el.classList.remove('open');
+    });
+    document.getElementById('size-options-' + pid).classList.toggle('open');
+  }
+
+  function selectSize(val, pid) {
+    document.getElementById('size-display-' + pid).innerText = val;
+    document.getElementById('size-' + pid).value = val;
+    document.getElementById('size-options-' + pid).classList.remove('open');
+    updateVariant(pid);
+  }
+
+  // Close dropdowns if clicked outside
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.custom-select-container')) {
+      document.querySelectorAll('.custom-select-options').forEach(el => el.classList.remove('open'));
+    }
+  });
+
+  // Variant Finding Logic
   function updateVariant(pid) {
     let variantsText = document.getElementById('variants-' + pid).textContent;
     if(!variantsText) return;
@@ -149,10 +225,8 @@
     let variants = JSON.parse(variantsText);
     let activeColorBox = document.querySelector('#color-box-' + pid + ' .active');
     let color = activeColorBox ? activeColorBox.getAttribute('data-val') : null;
-    let sizeSelect = document.getElementById('size-' + pid);
-    let size = sizeSelect ? sizeSelect.value : null;
+    let size = document.getElementById('size-' + pid).value;
     
-    // Find matching variant dynamically
     let matched = variants.find(v => {
       let matchColor = color ? v.options.includes(color) : true;
       let matchSize = size && size !== "" ? v.options.includes(size) : true;
@@ -164,26 +238,29 @@
     }
   }
 
-  // API Logic for adding items (Including the Bonus Jacket requirement)
+  // AJAX Cart & Bonus Jacket Logic
   function handleAjaxCart(event, pid) {
     event.preventDefault(); 
     
+    let size = document.getElementById('size-' + pid).value;
+    if(!size) {
+      alert("Please choose a size first.");
+      return;
+    }
+
     let btn = document.getElementById('btn-' + pid);
     btn.innerHTML = 'ADDING...';
     
     let variantId = document.getElementById('selected-variant-' + pid).value;
     let activeColorBox = document.querySelector('#color-box-' + pid + ' .active');
     let color = activeColorBox ? activeColorBox.getAttribute('data-val').toLowerCase() : '';
-    
-    let sizeSelect = document.getElementById('size-' + pid);
-    let size = sizeSelect && sizeSelect.value ? sizeSelect.value.toLowerCase() : '';
+    let sizeLower = size.toLowerCase();
     
     let bonusJacketId = document.getElementById('bonus-jacket-id').value;
-    
     let itemsToAdd = [{ id: parseInt(variantId), quantity: 1 }];
 
-    // CRITICAL CONDITION: If Black & Medium (M) is selected, add the jacket!
-    if (color === 'black' && (size === 'm' || size === 'medium') && bonusJacketId) {
+    // The Magic Condition: Black + Medium adds the free jacket!
+    if (color === 'black' && (sizeLower === 'm' || sizeLower === 'medium') && bonusJacketId) {
       itemsToAdd.push({ id: parseInt(bonusJacketId), quantity: 1 });
     }
 
@@ -193,16 +270,12 @@
       body: JSON.stringify({ items: itemsToAdd })
     })
     .then(response => {
-      if(response.ok) {
-        window.location.href = '/cart'; // Redirect to cart
-      } else {
-        alert("Error adding item to cart. Please ensure you selected a size.");
-        btn.innerHTML = 'ADD TO CART &rarr;';
-      }
+      if(response.ok) window.location.href = '/cart'; 
+      else { alert("Error adding item to cart."); btn.innerHTML = 'ADD TO CART &rarr;'; }
     })
     .catch(error => {
       console.error('Error:', error);
-      document.getElementById('form-' + pid).submit(); // Fallback
+      document.getElementById('form-' + pid).submit(); 
     });
   }
 </script>
