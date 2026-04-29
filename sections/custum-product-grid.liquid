@@ -4,21 +4,23 @@
   .wild-header h2 { font-size: 32px; font-weight: 400; color: #121212; margin: 0 0 30px 0; font-family: serif; }
   .wild-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
   
-  /* --- Product Image Card --- */
-  .wild-grid-item { position: relative; background-color: #fff; width: 100%; padding-top: 130%; overflow: hidden; }
-  .wild-grid-item > img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+  /* --- Product Image Card (FIXED IMAGE SIZING HERE) --- */
+  .wild-grid-item { position: relative; background-color: #fff; width: 100%; padding-top: 130%; overflow: hidden; border: 1px solid #eaeaea; }
+  
+  /* 'object-fit: contain' aur 'padding' image ko Figma jaisa chhota aur centered banayenge */
+  .wild-grid-item > img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; padding: 25px; z-index: 1; }
   
   /* --- Plus Button --- */
   .btn-open-modal { position: absolute; bottom: 15px; right: 15px; width: 35px; height: 35px; background-color: #fff; color: #000; border: none; border-radius: 50%; font-size: 20px; cursor: pointer; z-index: 2; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.2s; }
   .btn-open-modal:hover { transform: scale(1.1); }
   
   /* --- Quick View Modal Overlay --- */
-  .wild-quick-view { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #fff; z-index: 5; display: none; flex-direction: column; padding: 15px; box-sizing: border-box; border: 1px solid #eaeaea; }
+  .wild-quick-view { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #fff; z-index: 5; display: none; flex-direction: column; padding: 15px; box-sizing: border-box; border: 1px solid #eaeaea; overflow-y: auto; }
   .btn-close-modal { position: absolute; top: 5px; right: 8px; background: none; border: none; font-size: 16px; cursor: pointer; z-index: 6; }
   
-  /* --- Modal Info Area --- */
+  /* --- Modal Info Area (Thumbnail FIXED) --- */
   .modal-top-row { display: flex; gap: 12px; margin-bottom: 12px; height: auto; }
-  .modal-thumbnail { width: 35%; aspect-ratio: 3/4; object-fit: cover; }
+  .modal-thumbnail { width: 35%; aspect-ratio: 3/4; object-fit: contain; padding: 5px; background: #f9f9f9; border: 1px solid #eaeaea; }
   .modal-info { width: 65%; display: flex; flex-direction: column; justify-content: flex-start; }
   .modal-title { font-size: 13px; font-weight: normal; color: #333; margin: 0 0 4px; }
   .modal-price { font-size: 14px; font-weight: 600; color: #000; margin: 0 0 6px; }
@@ -34,22 +36,18 @@
     flex: 1; display: flex; align-items: center; justify-content: center; 
     font-size: 11px; cursor: pointer; background: #fff; color: #111; 
     border-right: 1px solid #111; text-transform: capitalize; position: relative;
-    padding-left: 10px; /* Space for the vertical color strip */
-    transition: all 0.2s ease; /* Explicit transition for smoother color change */
+    padding-left: 10px; 
+    transition: all 0.2s ease; 
   }
   .color-box:last-child { border-right: none; }
   
-  /* The vertical color strip inside the box */
   .color-box::before {
     content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 8px; 
     background-color: var(--swatch-color);
   }
 
-  /* UPDATED: Black Background Animation for Active/Selected Option */
   .color-box.active {
-    font-weight: 700;
-    background-color: #000; /* New black background */
-    color: #fff; /* New white text color */
+    font-weight: 700; background-color: #000; color: #fff; 
   }
   
   /* --- Size Select: Figma-Style custom dropdown --- */
@@ -68,7 +66,6 @@
   .custom-option:last-child { border-bottom: none; }
   .custom-option:hover { background: #f4f4f4; }
   
-  /* Chevron Animation */
   .select-chevron { display: flex; align-items: center; transition: transform 0.3s ease; }
   .custom-select-options.open ~ .custom-select-trigger .select-chevron { transform: rotate(180deg); }
 
@@ -80,12 +77,26 @@
   @media screen and (max-width: 768px) {
     .wild-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .tisso-wild-section { padding: 40px 15px; }
-    .wild-grid-item { padding-top: 165%; } 
-    .wild-quick-view { padding: 12px; }
-    .modal-desc { font-size: 9px; -webkit-line-clamp: 4; }
+    
+    /* Make images slightly smaller on mobile to free up space */
+    .wild-grid-item > img { padding: 15px; }
+    
+    /* Give popup more room */
+    .wild-grid-item { padding-top: 180%; } 
+    .wild-quick-view { padding: 10px; }
+    
+    /* Hide description on mobile to make room for size and cart button */
+    .modal-desc { display: none; } 
+    
+    .modal-title { font-size: 11px; }
+    .modal-price { font-size: 12px; }
+    
     .color-boxes, .custom-select-container { height: 30px; }
     .color-box { font-size: 10px; padding-left: 8px; }
-    .color-box::before { width: 6px; } /* Thinner strip on mobile */
+    .color-box::before { width: 6px; } 
+    .custom-select-trigger, .custom-option { font-size: 10px; }
+    
+    .btn-modal-cart { height: 36px; font-size: 10px; margin-top: 10px; }
   }
 {% endstyle %}
 
@@ -191,11 +202,9 @@
 </div>
 
 <script>
-  // Fundamental Modal Logic
   function openModal(id) { document.getElementById(id).style.display = 'flex'; }
   function closeModal(id) { document.getElementById(id).style.display = 'none'; }
   
-  // Color Visual Selection and Variant Update
   function selectColor(el, pid) {
     let container = document.getElementById('color-box-' + pid);
     container.querySelectorAll('.color-box').forEach(b => b.classList.remove('active'));
@@ -203,17 +212,13 @@
     updateVariant(pid);
   }
 
-  // Custom Dropdown UI Toggle Logic
   function toggleDropdown(pid) {
-    // Close other open dropdowns first to keep UI clean
     document.querySelectorAll('.custom-select-options').forEach(el => {
       if(el.id !== 'size-options-' + pid) el.classList.remove('open');
     });
-    // Toggle current
     document.getElementById('size-options-' + pid).classList.toggle('open');
   }
 
-  // Size Visual Selection, Update Form and close Dropdown
   function selectSize(val, pid) {
     document.getElementById('size-display-' + pid).innerText = val;
     document.getElementById('size-' + pid).value = val;
@@ -221,14 +226,12 @@
     updateVariant(pid);
   }
 
-  // Close dropdowns if clicked outside the container
   document.addEventListener('click', function(e) {
     if (!e.target.closest('.custom-select-container')) {
       document.querySelectorAll('.custom-select-options').forEach(el => el.classList.remove('open'));
     }
   });
 
-  // Dynamic Variant Finder Logic (Required by Shopify test)
   function updateVariant(pid) {
     let variantsText = document.getElementById('variants-' + pid).textContent;
     if(!variantsText) return;
@@ -239,22 +242,19 @@
     let sizeInput = document.getElementById('size-' + pid);
     let size = sizeInput ? sizeInput.value : null;
     
-    // Find matching variant dynamically based on selected option values
     let matched = variants.find(v => {
       let matchColor = color ? v.options.includes(color) : true;
       let matchSize = size && size !== "" ? v.options.includes(size) : true;
       return matchColor && matchSize;
     });
     
-    // If a variant is matched, update the hidden variant ID input in the form
     if (matched) {
       document.getElementById('selected-variant-' + pid).value = matched.id;
     }
   }
 
-  // Pure AJAX Cart Logic with dynamic conditions (Required by test critical warnings)
   function handleAjaxCart(event, pid) {
-    event.preventDefault(); // Stop normal form submit
+    event.preventDefault(); 
     
     let size = document.getElementById('size-' + pid).value;
     if(!size) {
@@ -272,15 +272,12 @@
     
     let bonusJacketId = document.getElementById('bonus-jacket-id').value;
     
-    // Main array of items to add via API
     let itemsToAdd = [{ id: parseInt(variantId), quantity: 1 }];
 
-    // CRITICAL CONDITION HANDLING: If Black & Medium (M) is selected, add the jacket!
     if (color === 'black' && (sizeLower === 'm' || sizeLower === 'medium') && bonusJacketId) {
       itemsToAdd.push({ id: parseInt(bonusJacketId), quantity: 1 });
     }
 
-    // Call Shopify AJAX Cart API
     fetch(window.Shopify.routes.root + 'cart/add.js', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -288,7 +285,7 @@
     })
     .then(response => {
       if(response.ok) {
-        window.location.href = '/cart'; // Redirect to cart upon success to prove functionality
+        window.location.href = '/cart'; 
       } else {
         alert("Error adding item to cart. (Possible reason: Sold Out)");
         btn.innerHTML = 'ADD TO CART &rarr;';
@@ -296,7 +293,6 @@
     })
     .catch(error => {
       console.error('Error:', error);
-      // Fallback: Submit normally if JS fails (but conditions won't run)
       document.getElementById('form-' + pid).submit(); 
     });
   }
